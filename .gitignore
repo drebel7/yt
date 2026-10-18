@@ -21,6 +21,18 @@
 *.7z
 
 # ---------------------------------------------------------------------------
+# Pliki robocze transkrypcji (same transkrypcje TXT sa wersjonowane)
+# ---------------------------------------------------------------------------
+/transkrypcje/.staging/
+/transkrypcje/.archives/
+/transkrypcje-list*.txt
+
+# Srodowiska Python (na wypadek dodania skryptow w Pythonie)
+.venv/
+__pycache__/
+*.pyc
+
+# ---------------------------------------------------------------------------
 # Lokalne kolejki pobran i historia (dane uzytkownika, nie kod)
 # Usun odpowiednia regule, jesli chcesz wersjonowac listy w repo.
 # ---------------------------------------------------------------------------

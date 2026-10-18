@@ -56,17 +56,23 @@ pliku `*-DONE.txt`, a oryginalna lista jest usuwana (żeby nie pobierać jej pon
 
 ```
 yt/
-├─ pobierz.ps1          # główny skrypt pobierający
+├─ pobierz.ps1          # główny skrypt pobierający filmy
+├─ transkrypcje.ps1     # pobieranie transkrypcji (napisy -> TXT)
 ├─ yt-dlp.exe           # binarka yt-dlp (ignorowana przez git)
-├─ yt-list.txt          # domyślna kolejka URL-i (ignorowana przez git)
+├─ yt-list.txt          # domyślna kolejka URL-i filmów (ignorowana przez git)
+├─ transkrypcje-list.txt # kolejka URL-i do transkrypcji (ignorowana przez git)
 ├─ yt-list2-DONE.txt    # historia już przetworzonej listy (ignorowana przez git)
 ├─ TODO.txt, TODO2.txt # notatki/zlecenia lokalne (ignorowane przez git)
 ├─ opencode.jsonc       # konfiguracja OpenCode (model, serwer MCP YouTube)
 ├─ AGENTS.md            # wskazówki dla agentów AI pracujących w repo
 ├─ README.md
-└─ downloads/           # pobrane media, ~65 GB (ignorowane przez git)
-   ├─ .archives/        # archiwa yt-dlp (lista pobranych pozycji playlist)
-   └─ <playlista>/      # katalogi playlist
+├─ downloads/           # pobrane media, ~65 GB (ignorowane przez git)
+│  ├─ .archives/        # archiwa yt-dlp (lista pobranych pozycji playlist)
+│  └─ <playlista>/      # katalogi playlist
+└─ transkrypcje/        # transkrypcje TXT, wersjonowane w repo
+   ├─ .archives/        # indeks ID pobranych transkrypcji (ignorowany)
+   ├─ .staging/         # pliki tymczasowe VTT/JSON (ignorowany)
+   └─ Qullamaggie/      # 443 transkrypcje kanału (~12 MB)
 ```
 
 ## Format listy URL
@@ -80,6 +86,95 @@ https://www.youtube.com/watch?v=...&list=PL...
 ```
 
 Puste linie i linie zaczynające się od `#` są pomijane.
+
+## Transkrypcje
+
+Drugi skrypt, `transkrypcje.ps1`, pobiera napisy (ręczne lub automatyczne)
+i zapisuje je jako czysty tekst. Nie wymaga Pythona ani klucza API — korzysta
+z tego samego `yt-dlp.exe`.
+
+```powershell
+.\transkrypcje.ps1                                   # domyślnie transkrypcje-list.txt
+.\transkrypcje.ps1 transkrypcje-list2.txt
+.\transkrypcje.ps1 lista.txt -Lang pl -OutDir transkrypcje
+.\transkrypcje.ps1 lista.txt -Limit 10 -Sleep 5      # test / ograniczenie
+```
+
+Lista URL ma ten sam format co `yt-list.txt` (jedna linia = jeden URL,
+`#` to komentarz). Obsługiwane są pojedyncze filmy, playlisty i kanały
+(URL kanału pobiera wszystkie filmy z zakładki uploads).
+
+### Jak to działa
+
+1. `yt-dlp --flat-playlist --print` zbiera same ID filmów (tanio, bez metadanych).
+2. ID już obecne w indeksie są pomijane.
+3. Dla pozostałych `yt-dlp` pobiera napisy `--sub-langs` (domyślnie `en`)
+   oraz `info.json` do `transkrypcje/.staging/`.
+4. Skrypt czyści VTT (znaczniki czasu, tagi, duplikaty linii), skleja tekst
+   i zapisuje plik z nagłówkiem `Title` / `URL` / `Published`.
+5. Pliki tymczasowe są usuwane.
+
+Wynik:
+
+```text
+transkrypcje\<kanał>\RRRR-MM-DD - <tytuł>.txt
+```
+
+Zawartość pliku:
+
+```text
+Title: Market mechanics, setups and more
+URL: https://www.youtube.com/watch?v=...
+Published: 2023-06-09
+------------------------------------------------------------
+
+<tekst transkrypcji w jednej linii>
+```
+
+### Wznawianie i duplikaty
+
+- Indeks `transkrypcje/.archives/subtitles.txt` jest **odtwarzany przy każdym
+  uruchomieniu** z nagłówków istniejących plików TXT. Usunięcie pliku powoduje,
+  że zostanie pobrany ponownie; przeniesione transkrypcje nie są dublowane.
+- Jeśli plik o tej samej dacie i tytule już istnieje, ale nie ma w nagłówku URL
+  (stary format `vtt_to_txt.py`), skrypt uzupełnia nagłówek zamiast tworzyć kopię.
+- Przy kolizji różnych filmów o tym samym dniu i tytule dodawany jest sufiks
+  ` [video_id]`.
+- Filmy bez napisów są raportowane jako `NOSUBS` i nie trafiają do indeksu,
+  więc można je ponowić później.
+
+### Przeniesione transkrypcje
+
+Katalog `transkrypcje/Qullamaggie/` zawiera 443 transkrypcje (ok. 12 MB)
+przeniesione ze starego projektu `Youtube_transcripts` (kanał Qullamaggie,
+lata 2017–2023). Pliki są w formacie opisanym wyżej i są przeznaczone do
+wersjonowania w repozytorium.
+
+## Silnik MCP YouTube (opcjonalnie)
+
+W sąsiednim katalogu `Youtube_transcripts/youtube-mcp/` znajduje się serwer
+[MCP](https://modelcontextprotocol.io/) (`youtube_server.py`) udostępniający
+agentom AI dwa narzędzia:
+
+- `search_youtube_videos` — wyszukiwanie filmów przez YouTube Data API v3
+  (wymaga `YOUTUBE_API_KEY`),
+- `get_youtube_transcript` — pobranie transkrypcji pojedynczego filmu
+  (biblioteka `youtube-transcript-api`).
+
+Konfiguracja w `opencode.jsonc` wskazuje na interpreter z jego środowiska
+`.venv`. To narzędzie działa „ad hoc” w rozmowie z agentem; masowe pobieranie
+transkrypcji realizuje `transkrypcje.ps1`. Sam katalog `youtube-mcp` nie jest
+częścią tego repozytorium i nie jest potrzebny do działania obu skryptów.
+
+Katalog `youtube-mcp` zajmuje ok. 250 MB, bo prawie całą objętość stanowi
+`.venv` (zależności: FastMCP, google-api-python-client, youtube-transcript-api
+oraz `yt-dlp`). Największy element to `googleapiclient/discovery_cache/documents`
+(~90 MB statycznych schematów API Google). To **nie jest** pełna dystrybucja
+Pythona: venv zawiera tylko `site-packages` i małe `python.exe`/`pythonw.exe`,
+a korzysta z bazowej instalacji Python 3.12 wskazanej w `pyvenv.cfg`
+(`C:\Users\daniel\AppData\Local\Programs\Python\Python312`). Przeniesienie
+katalogu na inną maszynę wymaga odtworzenia venv lub zainstalowania Pythona
+w tej samej lokalizacji.
 
 ## Konfiguracja OpenCode
 

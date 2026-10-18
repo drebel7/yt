@@ -10,13 +10,17 @@ AAC, MP4), a nie maksymalna jakość. Nie ma tu testów, pakietu ani CI.
 
 ## Najważniejsze pliki
 
-- `pobierz.ps1` — jedyny kod wykonywalny. Cała logika pobierania, wyboru formatu,
-  archiwizacji i przenoszenia listy do `*-DONE.txt`.
+- `pobierz.ps1` — jedyny kod wykonywalny pobierania filmów: wybór formatu,
+  archiwizacja i przenoszenie listy do `*-DONE.txt`.
+- `transkrypcje.ps1` — pobieranie transkrypcji (napisy → TXT) dla filmów,
+  playlist i kanałów; czyści VTT, indeksuje istniejące pliki, wznawia pobieranie.
 - `README.md` — dokumentacja użytkownika (po polsku).
 - `opencode.jsonc` — konfiguracja lokalna OpenCode; zawiera bezwzględne ścieżki
   Windows i nie powinna być „poprawiana” bez powodu.
-- `yt-list*.txt`, `TODO*.txt`, `downloads/`, `yt-dlp.exe` — dane lokalne,
-  ignorowane przez git.
+- `transkrypcje/` — transkrypcje TXT (wersjonowane), m.in. 443 pliki kanału
+  Qullamaggie. `transkrypcje/.staging` i `.archives` to pliki robocze.
+- `yt-list*.txt`, `transkrypcje-list*.txt`, `TODO*.txt`, `downloads/`,
+  `yt-dlp.exe`, `Youtube_transcripts/` — dane lokalne, ignorowane przez git.
 
 ## Zasady edycji
 
@@ -29,6 +33,13 @@ AAC, MP4), a nie maksymalna jakość. Nie ma tu testów, pakietu ani CI.
   `Split-Path -Parent $MyInvocation.MyCommand.Path`. Nie zmieniaj tego wzorca.
 - **Nie usuwaj ani nie commituj `downloads/`.** To ~65 GB mediów użytkownika.
   Nigdy nie uruchamiaj poleceń kasujących ten katalog.
+- **Nie usuwaj plików z `transkrypcje/<kanał>/`.** To dorobek użytkownika
+  (443 pliki Qullamaggie). Zmiana nazwy pliku psuje indeks, ale jest odtwarzana
+  z nagłówka `URL:`; jeśli musisz zmienić format, zachowaj linię z URL-em.
+- **Nie commituj `Youtube_transcripts/`** — to kopia starego projektu z `.venv`
+  (~260 MB). Jest ignorowana; źródłem funkcji transkrypcji jest `transkrypcje.ps1`.
+- **`transkrypcje.ps1` nie może zależeć od Pythona.** Ma używać wyłącznie
+  `yt-dlp.exe` (i opcjonalnie node/ffmpeg, jeśli yt-dlp tego wymaga).
 - **Nie commituj `yt-dlp.exe`** ani innych binarek — `.gitignore` już je wyklucza.
 - Zachowaj istniejące argumenty yt-dlp dotyczące kompatybilności
   (`-S +res:720,vcodec:h264,acodec:aac`, `--merge-output-format mp4`,
@@ -36,6 +47,11 @@ AAC, MP4), a nie maksymalna jakość. Nie ma tu testów, pakietu ani CI.
 - Nazewnictwo wyjścia jest częścią umowy: playlisty → osobny katalog +
   `%(playlist_index)03d - %(title)s.%(ext)s`; pojedyncze filmy → `%(title)s.%(ext)s`.
 - Archiwa playlist trzymaj w `downloads\.archives\<playlist_id>.txt`.
+- **Transkrypcje:** wynik to `transkrypcje\<kanał>\RRRR-MM-DD - <tytuł>.txt`
+  z nagłówkiem `Title:` / `URL:` / `Published:` i separatorem 60 myślników.
+  Indeks `transkrypcje\.archives\subtitles.txt` jest odtwarzany z nagłówków
+  `URL:` przy każdym uruchomieniu — nie usuwaj tej linii z plików.
+  Pliki VTT/JSON w `.staging` są tymczasowe i zawsze sprzątane po konwersji.
 
 ## Testowanie zmian
 
@@ -48,11 +64,20 @@ AAC, MP4), a nie maksymalna jakość. Nie ma tu testów, pakietu ani CI.
   go bez wyraźnej zgody użytkownika.
 - Nie modyfikuj plików `yt-list*.txt` użytkownika (poza celowym dodaniem testowego
   URL-a na kopii).
+- **Transkrypcje testuj na kopii:** `.\transkrypcje.ps1 test.txt -OutDir _test-tx -Limit 1`
+  (krótki film z napisami), sprawdź plik TXT, nagłówek i brak plików w `.staging`.
+  Następnie usuń `_test-tx`. Nie uruchamiaj pełnego kanału bez potrzeby —
+  588 filmów z domyślnym `-Sleep 3` trwa długo.
+- Pusty przebieg na istniejącym kanale powinien wypisać `do pobrania: 0`
+  (dowód, że indeks działa).
 
 ## Typowe zadania
 
 - **Nowa lista do pobrania:** użytkownik tworzy `yt-listN.txt`; uruchomienie to
   `.\pobierz.ps1 yt-listN.txt`. Nie trzeba zmieniać kodu.
+- **Nowe transkrypcje:** dopisz URL-e do `transkrypcje-list.txt` i uruchom
+  `.\transkrypcje.ps1`; dla innej listy podaj ścieżkę jako pierwszy argument.
+- **Zmiana języka napisów:** `-Lang pl` (lub `pl,en`).
 - **Zmiana preferencji jakości:** edytuj `$sortArgs` w `pobierz.ps1` i zaktualizuj
   README.
 - **Włączenie fallbacku HLS dla playlist:** `$HlsFallbackForPlaylists = $true`.
