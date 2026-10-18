@@ -66,6 +66,8 @@ yt/
 ├─ opencode.jsonc       # konfiguracja OpenCode (model, serwer MCP YouTube)
 ├─ AGENTS.md            # wskazówki dla agentów AI pracujących w repo
 ├─ README.md
+├─ docs/
+│  └─ Qullamaggie-strategia.md  # synteza strategii z transkrypcji
 ├─ downloads/           # pobrane media, ~65 GB (ignorowane przez git)
 │  ├─ .archives/        # archiwa yt-dlp (lista pobranych pozycji playlist)
 │  └─ <playlista>/      # katalogi playlist
@@ -92,6 +94,10 @@ Puste linie i linie zaczynające się od `#` są pomijane.
 Drugi skrypt, `transkrypcje.ps1`, pobiera napisy (ręczne lub automatyczne)
 i zapisuje je jako czysty tekst. Nie wymaga Pythona ani klucza API — korzysta
 z tego samego `yt-dlp.exe`.
+
+Syntetyczne opracowanie strategii Qullamaggie na podstawie wszystkich 443
+transkrypcji (2017–2023) znajduje się w
+[`docs/Qullamaggie-strategia.md`](docs/Qullamaggie-strategia.md).
 
 ```powershell
 .\transkrypcje.ps1                                   # domyślnie transkrypcje-list.txt
