@@ -1,0 +1,46 @@
+# ---------------------------------------------------------------------------
+# Pobrane media i dane robocze yt-dlp (dziesiątki GB) - NIGDY do repo
+# ---------------------------------------------------------------------------
+/downloads/
+*.part
+*.ytdl
+*.temp
+*.f*.mp4.part
+*.f*.m4a.part
+*.f*.webm.part
+
+# ---------------------------------------------------------------------------
+# Binaria i narzedzia lokalne (za duze / instalowane osobno)
+# ---------------------------------------------------------------------------
+/yt-dlp.exe
+/ffmpeg.exe
+/ffprobe.exe
+*.exe
+*.dll
+*.zip
+*.7z
+
+# ---------------------------------------------------------------------------
+# Lokalne kolejki pobran i historia (dane uzytkownika, nie kod)
+# Usun odpowiednia regule, jesli chcesz wersjonowac listy w repo.
+# ---------------------------------------------------------------------------
+yt-list*.txt
+*-DONE.txt
+*_done.txt
+
+# Notatki / zlecenia lokalne
+TODO*.txt
+
+# ---------------------------------------------------------------------------
+# System operacyjny / edytory / logi
+# ---------------------------------------------------------------------------
+Thumbs.db
+ehthumbs.db
+desktop.ini
+.DS_Store
+*.log
+*.tmp
+.vscode/
+.idea/
+*.swp
+*~
