@@ -27,6 +27,8 @@ pozostaje lokalna i jest ignorowana przez git.
 .\pobierz.ps1
 # lub z własną listą:
 .\pobierz.ps1 yt-list2.txt
+# z limitem 10 GB przyrostu:
+.\pobierz.ps1 yt-list2.txt -MaxTotalGB 10
 ```
 
 Pliki trafią do `downloads\`. Po zakończeniu zawartość listy jest dopisywana do
@@ -34,10 +36,16 @@ pliku `*-DONE.txt`, a oryginalna lista jest usuwana (żeby nie pobierać jej pon
 
 ## Jak działa `pobierz.ps1`
 
-- **Format obrazu:** preferencja `720p` → `1080p` → maksimum dostępne
+- **Format obrazu:** preferencja `720p` → maksimum dostępne w H.264
   (`-S +res:720,vcodec:h264,acodec:aac`).
 - **Kodek:** H.264 + AAC stereo, kontener MP4 (`--merge-output-format mp4`,
-  `--remux-video mp4`). Bez H.265/AV1/VP9, bo stare TV ich nie odtwarzają.
+  `--remux-video mp4`). Format jest **wymuszany filtrem** `vcodec^=avc1` /
+  `acodec^=mp4a`, więc nie trafi się VP9/AV1 ani Opus — nawet jeśli YouTube
+  oferuje wyższą rozdzielczość tylko w nowszym kodeku. Dla starych TV ważniejsza
+  jest zgodność niż rozdzielczość.
+- **Limit rozmiaru:** opcjonalny `-MaxTotalGB N` mierzy przyrost względem stanu
+  sprzed uruchomienia i przerywa przed kolejnym plikiem po osiągnięciu limitu.
+  Nieprzetworzone URL-e zostają w pliku listy (nie trafiają do `-DONE`).
 - **Playlisty:** każda playlista ląduje w osobnym katalogu, pliki mają numer
   trzycyfrowy z przodu: `downloads\<tytuł playlisty>\001 - <tytuł>.mp4`.
 - **Pojedyncze filmy:** `downloads\<tytuł>.mp4`.

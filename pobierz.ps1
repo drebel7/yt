@@ -1,10 +1,15 @@
 #requires -Version 5.1
 <#
-    pobierz.ps1 [plik-z-lista-URL]
+    pobierz.ps1 [plik-z-lista-URL] [-MaxTotalGB N]
 
     Pobiera filmy/playlisty z pliku z lista URL za pomoca yt-dlp.exe.
     Domyslny plik listy: yt-list.txt. Mozna podac inny, np.:
         .\pobierz.ps1 yt-list2.txt
+        .\pobierz.ps1 yt-list2.txt -MaxTotalGB 10
+
+    -MaxTotalGB N (opcjonalnie) ogranicza przyrost rozmiaru katalogu downloads
+    w danym uruchomieniu. Po osiagnieciu limitu skrypt przerywa i zostawia
+    nieprzetworzone URL-e w pliku listy (nie przenosi ich do -DONE).
 
     Zalozenia:
       - Obraz: preferowane 720p -> 1080p -> inne (gdy max < 720p, bierze max dostepny).
@@ -26,7 +31,8 @@
 #>
 
 param(
-    [string]$ListFile = 'yt-list.txt'
+    [string]$ListFile = 'yt-list.txt',
+    [double]$MaxTotalGB = 0
 )
 
 $ErrorActionPreference = 'Stop'
@@ -48,6 +54,12 @@ if (-not (Test-Path -LiteralPath $listFile)) { throw "Nie znaleziono: $listFile"
 
 New-Item -ItemType Directory -Force -Path $baseOut | Out-Null
 New-Item -ItemType Directory -Force -Path $archDir | Out-Null
+
+$baselineBytes = (Get-ChildItem $baseOut -Recurse -File -ErrorAction SilentlyContinue | Measure-Object Length -Sum).Sum
+if (-not $baselineBytes) { $baselineBytes = 0 }
+$limitBytes = if ($MaxTotalGB -gt 0) { $baselineBytes + ($MaxTotalGB * 1GB) } else { [double]::MaxValue }
+$minFreeBytes = 0
+if ($MaxTotalGB -gt 0) { $minFreeBytes = $limitBytes - (300MB) } # margines na jeden plik
 
 $baseArgs = @(
     '--ignore-errors'
@@ -76,19 +88,32 @@ $sortArgs = @(
     'mp4'
 )
 
-$fmtDash = 'bv*+ba/b'
-$fmtHls  = 'bv*[protocol*=m3u8]+ba[ext=m4a]/bv*+ba/b'
+$fmtDash = 'bv*[vcodec^=avc1]+ba[acodec^=mp4a]/bv*[vcodec^=avc1]+ba[ext=m4a]/bv*[vcodec^=avc1]+ba'
+$fmtHls  = 'bv*[protocol*=m3u8][vcodec^=avc1]+ba[acodec^=mp4a]/bv*[protocol*=m3u8][vcodec^=avc1]+ba/bv*[vcodec^=avc1]+ba[acodec^=mp4a]/bv*[vcodec^=avc1]+ba'
 
-$urls = Get-Content -LiteralPath $listFile |
+$urls = @(Get-Content -LiteralPath $listFile |
     ForEach-Object { $_.Trim() } |
-    Where-Object { $_ -ne '' -and -not $_.StartsWith('#') }
+    Where-Object { $_ -ne '' -and -not $_.StartsWith('#') })
 
 if (-not $urls) { throw "Brak adresow w $listFile" }
 
 $ok = 0
 $fail = 0
+$stoppedByLimit = $false
 
-foreach ($url in $urls) {
+for ($i = 0; $i -lt $urls.Count; $i++) {
+    $url = $urls[$i]
+
+    if ($MaxTotalGB -gt 0) {
+        $currentBytes = (Get-ChildItem $baseOut -Recurse -File -ErrorAction SilentlyContinue | Measure-Object Length -Sum).Sum
+        if (-not $currentBytes) { $currentBytes = 0 }
+        if ($currentBytes -ge $minFreeBytes) {
+            $stoppedByLimit = $true
+            Write-Host "Osiagnieto limit $MaxTotalGB GB - przerywam pobieranie." -ForegroundColor Yellow
+            break
+        }
+    }
+
     Write-Host ""
     Write-Host "=== $url ===" -ForegroundColor Cyan
 
@@ -132,17 +157,26 @@ Get-ChildItem $baseOut -Recurse -Filter *.part -File -ErrorAction SilentlyContin
 }
 
 $mp4Count = (Get-ChildItem $baseOut -Recurse -Filter *.mp4 -File -ErrorAction SilentlyContinue).Count
-$sizeGb   = [math]::Round(((Get-ChildItem $baseOut -Recurse -File -ErrorAction SilentlyContinue | Measure-Object Length -Sum).Sum / 1GB), 2)
+$totalBytes = (Get-ChildItem $baseOut -Recurse -File -ErrorAction SilentlyContinue | Measure-Object Length -Sum).Sum
+if (-not $totalBytes) { $totalBytes = 0 }
+$sizeGb   = [math]::Round(($totalBytes / 1GB), 2)
+$deltaGb  = [math]::Round((($totalBytes - $baselineBytes) / 1GB), 2)
 
 Write-Host ""
-Write-Host "Gotowe. URL: sukces=$ok, bledy=$fail | plikow MP4: $mp4Count | rozmiar: $sizeGb GB" -ForegroundColor Green
+Write-Host "Gotowe. URL: sukces=$ok, bledy=$fail | plikow MP4: $mp4Count | rozmiar: $sizeGb GB (w tym zadaniu: $deltaGb GB)" -ForegroundColor Green
 
 # Po zakonczeniu pobierania przenies zawartosc listy do pliku z sufiksem -DONE.txt.
 $listDir  = Split-Path -Parent $listFile
 $listBase = [System.IO.Path]::GetFileNameWithoutExtension($listFile)
 $doneFile = Join-Path $listDir ($listBase + '-DONE.txt')
 
-if ($listBase -match '-DONE$') {
+if ($stoppedByLimit) {
+    $remaining = @()
+    if ($i -lt $urls.Count) { $remaining = @($urls[$i..($urls.Count - 1)]) }
+    Set-Content -LiteralPath $listFile -Value $remaining -Encoding UTF8
+    Write-Host "Lista nie zostala przeniesiona do -DONE; w pliku pozostalo $($remaining.Count) URL." -ForegroundColor Yellow
+}
+elseif ($listBase -match '-DONE$') {
     Write-Host "Lista '$listBase' jest juz plikiem -DONE; pomijam przenoszenie." -ForegroundColor DarkYellow
 }
 elseif (Test-Path -LiteralPath $listFile) {
