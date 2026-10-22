@@ -8,6 +8,12 @@ Artykuły o strategiach Marka Minerviniego: SEPA, Trend Template, VCP, zarządza
 i praktyczne zastosowanie w screeningu. Treść artykułów zapisano w plikach Markdown;
 grafiki będące częścią artykułów znajdują się w podkatalogu `images/`.
 
+## Opracowanie strategii
+
+- **[Minervini-strategy.md](Minervini-strategy.md)** — synteza metodyki SEPA, Trend Template,
+  VCP i setupów pochodnych w języku angielskim, z myślą o implementacji algorytmów:
+  reguły, pseudokod, parametry, zarządzanie ryzykiem, przykłady (KD, XLE) i lista rozbieżności.
+
 ## Artykuły
 
 | # | Artykuł | Autor | Język | Data | Plik |
