@@ -21,6 +21,10 @@ AAC, MP4), a nie maksymalna jakość. Nie ma tu testów, pakietu ani CI.
   Qullamaggie. `transkrypcje/.staging` i `.archives` to pliki robocze.
 - `docs/Qullamaggie-strategia.md` — synteza strategii (EP, ORB, selekcja, wyjścia)
   na podstawie transkrypcji; źródło do implementacji algorytmów.
+- `tools/pdf2md/` — konwerter PDF → Markdown (Python: PyMuPDF + wordfreq).
+  Użyty do `docs/trading/_books/*.md`; szczegóły w `tools/pdf2md/README.md`.
+- `docs/trading/_books/` — dwie książki Schwagera w PDF oraz ich wersje
+  Markdown (`Stock Market Wizards.md`, `The New Market Wizards.md`).
 - `yt-list*.txt`, `transkrypcje-list*.txt`, `TODO*.txt`, `downloads/`,
   `yt-dlp.exe`, `Youtube_transcripts/` — dane lokalne, ignorowane przez git.
 
