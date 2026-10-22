@@ -17,8 +17,9 @@ AAC, MP4), a nie maksymalna jakość. Nie ma tu testów, pakietu ani CI.
 - `README.md` — dokumentacja użytkownika (po polsku).
 - `opencode.jsonc` — konfiguracja lokalna OpenCode; zawiera bezwzględne ścieżki
   Windows i nie powinna być „poprawiana” bez powodu.
-- `transkrypcje/` — transkrypcje TXT (wersjonowane), m.in. 443 pliki kanału
-  Qullamaggie. `transkrypcje/.staging` i `.archives` to pliki robocze.
+- `transkrypcje/` — transkrypcje TXT (tylko lokalne, ignorowane przez git),
+  m.in. 443 pliki kanału Qullamaggie. `transkrypcje/.staging` i `.archives` to
+  pliki robocze.
 - `docs/Qullamaggie-strategia.md` — synteza strategii (EP, ORB, selekcja, wyjścia)
   na podstawie transkrypcji; źródło do implementacji algorytmów.
 - `tools/pdf2md/` — konwerter PDF → Markdown (Python: PyMuPDF + wordfreq).

@@ -79,7 +79,7 @@ yt/
 ├─ downloads/           # pobrane media, ~65 GB (ignorowane przez git)
 │  ├─ .archives/        # archiwa yt-dlp (lista pobranych pozycji playlist)
 │  └─ <playlista>/      # katalogi playlist
-└─ transkrypcje/        # transkrypcje TXT, wersjonowane w repo
+└─ transkrypcje/        # transkrypcje TXT (lokalne, ignorowane przez git)
    ├─ .archives/        # indeks ID pobranych transkrypcji (ignorowany)
    ├─ .staging/         # pliki tymczasowe VTT/JSON (ignorowany)
    └─ Qullamaggie/      # 443 transkrypcje kanału (~12 MB)
@@ -161,8 +161,9 @@ Published: 2023-06-09
 
 Katalog `transkrypcje/Qullamaggie/` zawiera 443 transkrypcje (ok. 12 MB)
 przeniesione ze starego projektu `Youtube_transcripts` (kanał Qullamaggie,
-lata 2017–2023). Pliki są w formacie opisanym wyżej i są przeznaczone do
-wersjonowania w repozytorium.
+lata 2017–2023). Pliki są w formacie opisanym wyżej. Cały katalog
+`transkrypcje/` jest trzymany wyłącznie lokalnie i ignorowany przez git
+(pełne transkrypcje mogą podlegać prawom autorskim).
 
 ## Silnik MCP YouTube (opcjonalnie)
 

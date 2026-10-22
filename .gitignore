@@ -21,10 +21,9 @@
 *.7z
 
 # ---------------------------------------------------------------------------
-# Pliki robocze transkrypcji (same transkrypcje TXT sa wersjonowane)
+# Transkrypcje i ich pliki robocze - tylko lokalnie (prawa autorskie)
 # ---------------------------------------------------------------------------
-/transkrypcje/.staging/
-/transkrypcje/.archives/
+/transkrypcje/
 /transkrypcje-list*.txt
 
 # Srodowiska Python (na wypadek dodania skryptow w Pythonie)
