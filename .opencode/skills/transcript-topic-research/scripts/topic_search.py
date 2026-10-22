@@ -109,17 +109,17 @@ def main():
     label = args.label or args.topic
 
     lines = [
-        f"# Indeks tematyczny — {label}",
+        f"# Thematic index — {label}",
         "",
-        "Wyszukiwanie deterministyczne (regex, bez LLM) w plikach transkrypcji.",
+        "Deterministic regex search (no LLM) over transcript files.",
         "",
-        f"- **Wzorzec:** `{args.pattern}` (bez rozróżniania wielkości liter)",
-        f"- **Katalog źródłowy:** `{os.path.relpath(root, os.getcwd()).replace(os.sep, '/')}`",
-        f"- **Pliki z trafieniami:** {len(rows)}",
-        f"- **Łączna liczba trafień:** {total_hits}",
-        f"- **Wygenerowano:** {date.today().isoformat()}",
+        f"- **Pattern:** `{args.pattern}` (case-insensitive)",
+        f"- **Root:** `{os.path.relpath(root, os.getcwd()).replace(os.sep, '/')}`",
+        f"- **Files with matches:** {len(rows)}",
+        f"- **Total matches:** {total_hits}",
+        f"- **Generated:** {date.today().isoformat()}",
         "",
-        "| Data | Kanał | Tytuł | Trafienia | Plik |",
+        "| Date | Channel | Title | Hits | File |",
         "| --- | --- | --- | ---: | --- |",
     ]
     for row in rows:
@@ -134,7 +134,7 @@ def main():
         )
 
     if not rows:
-        lines.extend(["", "_Brak trafień._"])
+        lines.extend(["", "_No matches._"])
 
     with open(out_path, "w", encoding="utf-8") as handle:
         handle.write("\n".join(lines).rstrip() + "\n")
@@ -159,7 +159,7 @@ def main():
                 indent=2,
             )
 
-    print(f"{len(rows)} plików, {total_hits} trafień -> {out_path}")
+    print(f"{len(rows)} files, {total_hits} matches -> {out_path}")
     return 0
 
 

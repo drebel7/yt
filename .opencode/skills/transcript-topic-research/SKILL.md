@@ -1,160 +1,177 @@
 ---
 name: Transcript Topic Research
-description: Przeszukuje lokalne transkrypcje YouTube pod kątem tematu (najpierw deterministycznie, bez LLM), tworzy indeks tematyczny i opracowuje trzy raporty o różnej długości z odnośnikami do źródeł.
+description: Search local YouTube transcript files for a topic using deterministic regex (no LLM), build a thematic index, and write three evidence-linked reports of different lengths.
 ---
 
-# Badanie tematyczne transkrypcji YouTube
+# Transcript Topic Research
 
-Użyj tego skilla, gdy użytkownik chce znaleźć w lokalnych transkrypcjach
-materiały na określony temat, a następnie dostać krótkie, średnie i długie
-opracowanie z odnośnikami do filmów źródłowych.
+Use this skill when the user wants to:
 
-## Zasady nadrzędne
+1. find local YouTube transcripts about a topic;
+2. get a thematic index of the matching files;
+3. get short, medium, and long reports with source links.
 
-- **Pierwsze wyszukiwanie jest deterministyczne — bez LLM.** Używaj regexu
-  (`topic_search.py`, `grep` lub `rg`), nie modelu językowego.
-- **Nie zmyślaj źródeł ani treści.** Każda teza w raportach musi mieć
-  odzwierciedlenie w transkrypcji albo być wyraźnie oznaczona jako kontekst
-  zewnętrzny.
-- **Parafrazuj.** Nie kopiuj długich fragmentów transkrypcji; streszczaj.
-  Transkrypcje są lokalne i mogą podlegać prawom autorskim.
-- **Rozdzielaj rodzaje wiedzy:** bezpośrednie twierdzenia autorów filmów,
-  opisy badań, doświadczenia/anegdoty i ogólny konsensus medyczny. Przy
-  tematach zdrowotnych dodaj zastrzeżenie, że to nie jest porada medyczna.
-- **Nie mieszaj kanałów bez oznaczenia.** W raportach podawaj kanał, datę
-  i link do filmu.
+The transcripts are local `.txt` files. Each file starts with:
 
-## Krok 1 — ustal temat i wzorce
+```text
+Title: ...
+URL: https://www.youtube.com/watch?v=...
+Published: YYYY-MM-DD
+------------------------------------------------------------
+```
 
-Ustal:
+## Rules
 
-- `slug` tematu, np. `migrena`, `insulinoopornosc`, `witamina-d`;
-- etykietę, np. `Migrena`;
-- wzorzec podstawowy z rdzeniem polskich odmian, np. `migren` (łapie
-  migrena, migreny, migrenie, migreną, migrenom, migrenowy itd.);
-- opcjonalnie synonimy do drugiego przebiegu.
+- **Search first without an LLM.** Use the regex script, `grep`, or `rg`.
+- **Never invent sources or facts.** Every claim in a report must come from a transcript or be clearly marked as outside context.
+- **Paraphrase.** Do not copy long transcript passages. Transcripts may be copyrighted.
+- **Separate evidence types:** speaker's claim, cited study, personal experience, and general medical consensus.
+- **For health topics, add a disclaimer:** this is not medical advice.
+- **Include channel, date, and YouTube link** for every source.
 
-Nie używaj LLM do wyszukiwania. Wzorzec ma być jawny i powtarzalny.
+## Step 1 — Define the topic
 
-## Krok 2 — pierwszy przebieg (tylko słowa kluczowe)
+Choose:
 
-Z katalogu repo:
+- `slug` — short lowercase name, for example `migraine`;
+- `label` — human-readable name, for example `Migraine`;
+- `pattern` — a case-insensitive regex.
+
+For inflected languages, search the word stem. Example for Polish: `migren` matches
+`migrena`, `migreny`, `migrenie`, `migreną`, `migrenom`, `migrenowy`.
+
+## Step 2 — Run the deterministic search
+
+Run from the repository root:
 
 ```bash
 python3 .opencode/skills/transcript-topic-research/scripts/topic_search.py \
-  --topic migrena \
-  --label "Migrena" \
+  --topic migraine \
+  --label "Migraine" \
   --pattern 'migren' \
   --root transkrypcje \
-  --out transkrypcje/_tematy/migrena.md \
-  --json transkrypcje/_tematy/migrena.json
+  --out transkrypcje/_tematy/migraine.md \
+  --json transkrypcje/_tematy/migraine.json
 ```
 
-Skrypt:
+The script:
 
-- przeszukuje wszystkie `*.txt` poza `.staging`, `.archives` i `_tematy`;
-- liczy trafienia i czyta nagłówki `Title:`, `URL:`, `Published:`;
-- zapisuje indeks Markdown i opcjonalny JSON;
-- nie korzysta z sieci ani z modelu.
+- scans every `*.txt` file under `--root`;
+- skips `.staging`, `.archives`, and `_tematy`;
+- counts regex matches;
+- reads `Title:`, `URL:`, and `Published:` headers;
+- writes a Markdown index and an optional JSON file;
+- does not use the network or an LLM.
 
-Równoważny szybki podgląd:
+Quick check with grep-like tools:
 
 ```bash
 rg -il 'migren' transkrypcje --glob '*.txt' --glob '!.staging/**' --glob '!.archives/**'
 ```
 
-Zapisz wynik pierwszego przebiegu. To jest **indeks tematyczny** wymagany
-przez użytkownika.
+Save this first result. It is the required **thematic index**.
 
-## Krok 3 — drugi przebieg (synonimy, opcjonalnie)
+## Step 3 — Optional synonym pass
 
-Jeśli pierwszy przebieg daje mało trafień albo temat bywa opisywany inaczej,
-zrób osobny przebieg z jawnymi synonimami i zapisz go jako
-`transkrypcje/_tematy/<slug>-synonimy.md`. Nie mieszaj go po cichu z pierwszym
-indeksem — w raporcie napisz, jakie wzorce zastosowano.
+If the first pass finds too few files, run a second pass with explicit synonyms.
+Save it separately as `transkrypcje/_tematy/<slug>-synonyms.md`.
 
-Przykład dla migreny:
+Example:
 
 ```bash
 python3 .opencode/skills/transcript-topic-research/scripts/topic_search.py \
-  --topic migrena-synonimy \
-  --label "Migrena — synonimy" \
-  --pattern 'ból głowy|bóle głowy|bólu głowy|bólom głowy|bólem głowy|hemikrani|aura migrenowa' \
-  --out transkrypcje/_tematy/migrena-synonimy.md
+  --topic migraine-synonyms \
+  --label "Migraine — synonyms" \
+  --pattern 'headache|hemicrania|migraine aura' \
+  --out transkrypcje/_tematy/migraine-synonyms.md
 ```
 
-## Krok 4 — przegląd i notatki
+Do not silently merge the two indexes. State which patterns were used.
 
-1. Otwórz indeks i sprawdź, czy trafienia nie są przypadkowe (np. wzmianka
-   w opisie innego tematu).
-2. Przeczytaj transkrypcje z trafieniami. Przy dużej liczbie zacznij od
-   największej liczby trafień i od kanałów specjalistycznych.
-3. Zapisz robocze notatki w `transkrypcje/_tematy/<slug>-notatki.md`
-   (plik lokalny, ignorowany przez git):
-   - twierdzenie;
-   - kto i w jakim filmie to mówi;
-   - czy to badanie, doświadczenie, opinia czy anegdota;
-   - data i link.
-4. Oddzielaj przyczyny, czynniki wyzwalające, profilaktykę, metody naturalne,
-   leki i objawy alarmowe.
+## Step 4 — Read and take notes
 
-## Krok 5 — trzy raporty
+1. Open the thematic index.
+2. Remove irrelevant hits, for example a single passing mention in an unrelated video.
+3. Read the matching transcripts. If there are many, start with the highest hit
+   counts and specialist channels.
+4. Write working notes to `transkrypcje/_tematy/<slug>-notes.md` (local, ignored by git).
+5. For each note, record:
+   - the claim;
+   - the channel and video;
+   - whether it is a study, experience, opinion, or anecdote;
+   - the date and YouTube link.
+6. Group notes into: causes, triggers, prevention, natural methods, medication,
+   and red flags.
 
-Zapisz raporty w `docs/tematy/<slug>/`:
+## Step 5 — Write three reports
+
+Create:
 
 ```text
-docs/tematy/migrena/
+docs/tematy/<slug>/
 ├─ README.md
-├─ 01-krotki.md
-├─ 02-sredni.md
-└─ 03-dlugi.md
+├─ 01-short.md
+├─ 02-medium.md
+└─ 03-long.md
 ```
 
-Długość licz dla tempa ok. 200 słów/min:
+Target reading speed: about 200 words per minute.
 
-| Plik | Czas czytania | Orientacyjna długość |
+Write report content in the user's language. Keep the English filenames below so
+the same skill works across projects.
+
+| File | Reading time | Target length |
 | --- | --- | --- |
-| `01-krotki.md` | 1–3 min | 250–600 słów |
-| `02-sredni.md` | 5–8 min | 1000–1600 słów |
-| `03-dlugi.md` | 10–25 min | 2000–5000 słów |
+| `01-short.md` | 1–3 min | 250–600 words |
+| `02-medium.md` | 5–8 min | 1000–1600 words |
+| `03-long.md` | 10–25 min | 2000–5000 words |
 
-Wymagania:
+Requirements:
 
-- **Krótki:** najważniejsze wnioski, 3–5 praktycznych punktów, 3–5 źródeł.
-- **Średni:** sekcje tematyczne, mechanizmy, przyczyny, profilaktyka, metody
-  naturalne, leki, zastrzeżenia; przypisy `[1]`, `[2]` i lista źródeł z
-  linkami YouTube oraz nazwami plików.
-- **Długi:** pełny przegląd, różnice między źródłami, jakość dowodów,
-  praktyczne protokoły, przeciwwskazania, pytania do lekarza, obszerna
-  bibliografia.
-- **README:** jednozdaniowy opis, spis raportów, data, zakres kanałów i wzorce
-  wyszukiwania.
+- **Short:** key conclusions, 3–5 practical points, 3–5 sources.
+- **Medium:** thematic sections, mechanisms, causes, prevention, natural methods,
+  medication, cautions; numbered citations `[1]`, `[2]` and a source list with
+  YouTube links and local file names.
+- **Long:** full review, differences between sources, evidence quality, practical
+  protocols, contraindications, questions for a clinician, full bibliography.
+- **README:** one-sentence description, report list, date, channel range, and
+  search patterns.
 
-Dla tematów medycznych stosuj szkielet: definicja → przyczyny i mechanizmy →
-czynniki wyzwalające → profilaktyka → metody naturalne → leki → kiedy do
-lekarza → jakość dowodów → bibliografia.
+For medical topics, use this structure:
 
-## Krok 6 — kontrola jakości
+1. Definition
+2. Causes and mechanisms
+3. Triggers
+4. Prevention
+5. Natural methods
+6. Medication
+7. When to see a doctor
+8. Evidence quality
+9. References
 
-- Sprawdź liczbę słów w każdym raporcie.
-- Sprawdź, czy każdy przypis prowadzi do istniejącego pliku i linku YouTube.
-- Sprawdź, czy w raportach nie ma nieoznaczonych twierdzeń spoza transkrypcji.
-- Sprawdź, czy indeks tematyczny obejmuje wszystkie pliki z trafieniami.
-- Nie dodawaj transkrypcji ani ich fragmentów do gita; raporty w `docs/` są
-  streszczeniem, nie kopią źródeł.
+## Step 6 — Quality check
 
-## Szablon przypisów
+- Count the words in each report.
+- Check that every citation points to an existing file and YouTube link.
+- Check that no unsourced claim appears as fact.
+- Check that the thematic index contains every matching file.
+- Do not add transcripts or long excerpts to git. Reports in `docs/` are summaries,
+  not copies of the sources.
+
+## Citation format
 
 ```markdown
-[1] **Kanał**, „Tytuł filmu”, 2024-05-01.
+[1] **Channel**, "Video title", 2024-05-01.
     [YouTube](https://www.youtube.com/watch?v=ID) ·
-    plik: `transkrypcje/Kanał/2024-05-01 - Tytuł.txt`
+    file: `transkrypcje/Channel/2024-05-01 - Title.txt`
 ```
 
-## Szybki start dla nowego tematu
+## Minimal workflow for a new topic
 
 ```bash
 python3 .opencode/skills/transcript-topic-research/scripts/topic_search.py \
-  --topic <slug> --label "<Etykieta>" --pattern '<rdzeń>' \
+  --topic <slug> --label "<Label>" --pattern '<stem>' \
   --out transkrypcje/_tematy/<slug>.md
 ```
+
+Then read the matches and write the three reports.
