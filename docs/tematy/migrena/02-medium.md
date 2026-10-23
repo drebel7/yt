@@ -38,7 +38,7 @@ Zasada podstawowa: **im wcześniej, tym skuteczniej**, ale nie w aurze — trypt
 **Leki pierwszego rzutu (bez recepty):**
 - NLPZ: kwas acetylosalicylowy (np. 1 g), ibuprofen (w migrenie często 400–800 mg), naproksen, ketoprofen, diklofenak, kwas tolfenamowy [1][12][13].
 - Paracetamol — około 1 g w migrenie; słabszy od NLPZ, ale lepiej tolerowany.
-- Leki przeciwwymiotne (np. metoklopramid) przy nudnościom i wymiotom.
+- Leki przeciwwymiotne (np. metoklopramid) przy nudnościach i wymiotach.
 - Kofeina może zwiększać skuteczność leku przeciwbólowego, ale tylko u osób, które jej nie nadużywają [1][11].
 
 **Tryptany** (sumatryptan, almotryptan, zolmitryptan, eletryptan i inne) to leki swoiste dla migreny. Działają na receptory 5-HT1B/1D, zmniejszają uwalnianie CGRP i zwężają naczynia oponowe; skuteczność ocenia się na 70–80%. Przy nieskuteczności jednego można spróbować innego. Przeciwwskazania to m.in. choroba niedokrwienna serca i niekontrolowane nadciśnienie — decyduje lekarz [1].

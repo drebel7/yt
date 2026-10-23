@@ -11,7 +11,7 @@ Zbiór trzech raportów o migrenie przygotowanych na podstawie lokalnych transkr
 ## Metoda
 
 1. Deterministyczne wyszukiwanie regexem po polskich odmianach rdzenia `migren` (bez LLM) w katalogu `transkrypcje/`.
-2. Indeks tematyczny: `transkrypcje/_tematy/migrena.md` — 223 pliki i 1402 trafienia.
+2. Indeks tematyczny w repo: [INDEX.md](INDEX.md) — 223 pliki i 1402 trafienia; kopia robocza: `transkrypcje/_tematy/migrena.md`.
 3. Drugi przebieg po synonimach: `transkrypcje/_tematy/migrena-synonimy.md`.
 4. Analiza źródeł i synteza w trzech raportach.
 

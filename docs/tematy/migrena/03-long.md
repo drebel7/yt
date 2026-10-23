@@ -12,7 +12,7 @@ Migrena jest pierwotną chorobą mózgu. W międzynarodowej klasyfikacji wyróż
 
 Migrena przewlekła to ból głowy przez co najmniej 15 dni w miesiącu przez ponad 3 miesiące, z czego co najmniej 8 dni spełnia kryteria migrenowego bólu. W praktyce wielu pacjentów ma 25–30 dni bólowych w miesiącu, a „czystych” dni bez bólu jest zaledwie kilka [3][7].
 
-W Polski szacunki mówią o około 11% populacji, czyli 4–6 mln osób. Kobiety chorują znacznie częściej — około 19% kobiet i 6% mężczyzn; w pewnych okresach życia przewaga kobiet sięga 3–4 razy. Migrena przewlekła dotyczy około 1–2% populacji, czyli mniej więcej co dziesiątej osoby z migreną. Szczyt zachorowań przypada na wiek produkcyjny, co czyni migrenę jedną z najważniejszych przyczyn niepełnosprawności przed 50. rokiem życia [2][3][5][6].
+W Polsce szacunki mówią o około 11% populacji, czyli 4–6 mln osób. Kobiety chorują znacznie częściej — około 19% kobiet i 6% mężczyzn; w pewnych okresach życia przewaga kobiet sięga 3–4 razy. Migrena przewlekła dotyczy około 1–2% populacji, czyli mniej więcej co dziesiątej osoby z migreną. Szczyt zachorowań przypada na wiek produkcyjny, co czyni migrenę jedną z najważniejszych przyczyn niepełnosprawności przed 50. rokiem życia [2][3][5][6].
 
 Migrena jest też chorobą kosztowną. Źródła przytaczają szacunki strat gospodarczych rzędu dziesiątek miliardów euro w Europie i miliardów dolarów w USA; poza kosztami leczenia liczy się absencja, prezenteizm i obciążenie rodzin [18].
 
@@ -111,7 +111,7 @@ Warto odróżnić wyzwalacz od objawu prodromalnego. Jeśli ktoś „zawsze prze
 
 **Paracetamol:** około 1 g. Słabszy od NLPZ, ale lepiej tolerowany; szczególnie ważny u osób z przeciwwskazaniami do NLPZ. Nie łączyć z alkoholem; uważać na wątrobę [1][17].
 
-**Leki przeciwwymiotne:** metoklopramid, domperidon lub inne — według zaleceń lekarza. Pomagają przy nudnościom i wymiotom, a metoklopramid może też poprawiać wchłanianie leków [1].
+**Leki przeciwwymiotne:** metoklopramid, domperidon lub inne — według zaleceń lekarza. Pomagają przy nudnościach i wymiotach, a metoklopramid może też poprawiać wchłanianie leków [1].
 
 **Kofeina:** około 100–150 mg może zwiększać skuteczność NLPZ. Jednak regularne wysokie spożycie i odstawienie mogą same wywoływać ból [11][16].
 
