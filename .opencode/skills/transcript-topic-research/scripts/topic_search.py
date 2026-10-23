@@ -108,6 +108,13 @@ def main():
     rows.sort(key=lambda row: (row["date"], row["channel"].lower(), row["title"].lower()))
     label = args.label or args.topic
 
+    by_channel = {}
+    for row in rows:
+        entry = by_channel.setdefault(row["channel"], {"files": 0, "hits": 0})
+        entry["files"] += 1
+        entry["hits"] += row["hits"]
+    channel_rows = sorted(by_channel.items(), key=lambda item: (-item[1]["hits"], item[0].lower()))
+
     lines = [
         f"# Thematic index — {label}",
         "",
@@ -119,9 +126,23 @@ def main():
         f"- **Total matches:** {total_hits}",
         f"- **Generated:** {date.today().isoformat()}",
         "",
-        "| Date | Channel | Title | Hits | File |",
-        "| --- | --- | --- | ---: | --- |",
+        "## Matches by channel",
+        "",
+        "| Channel | Files | Hits |",
+        "| --- | ---: | ---: |",
     ]
+    for channel, stats in channel_rows:
+        lines.append(f"| {md_cell(channel)} | {stats['files']} | {stats['hits']} |")
+
+    lines.extend(
+        [
+            "",
+            "## Files",
+            "",
+            "| Date | Channel | Title | Hits | File |",
+            "| --- | --- | --- | ---: | --- |",
+        ]
+    )
     for row in rows:
         title = md_cell(row["title"])
         link = f"[{title}](<{row['link']}>)"
