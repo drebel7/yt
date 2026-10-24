@@ -14,6 +14,9 @@ AAC, MP4), a nie maksymalna jakość. Nie ma tu testów, pakietu ani CI.
   archiwizacja i przenoszenie listy do `*-DONE.txt`.
 - `transkrypcje.ps1` — pobieranie transkrypcji (napisy → TXT) dla filmów,
   playlist i kanałów; czyści VTT, indeksuje istniejące pliki, wznawia pobieranie.
+- `nazwy.ps1` — wspólna normalizacja nazw do czystego ASCII
+  (`ConvertTo-SafeFileName`, `Rename-ToSafeNames`). Używana przez oba skrypty;
+  nie duplikuj tej logiki w `pobierz.ps1` ani `transkrypcje.ps1`.
 - `README.md` — dokumentacja użytkownika (po polsku).
 - `opencode.jsonc` — konfiguracja lokalna OpenCode; zawiera bezwzględne ścieżki
   Windows i nie powinna być „poprawiana” bez powodu.
@@ -53,6 +56,9 @@ AAC, MP4), a nie maksymalna jakość. Nie ma tu testów, pakietu ani CI.
   `--remux-video mp4`, `--windows-filenames`). Zmiana ich zmienia format wyjściowy.
 - Nazewnictwo wyjścia jest częścią umowy: playlisty → osobny katalog +
   `%(playlist_index)03d - %(title)s.%(ext)s`; pojedyncze filmy → `%(title)s.%(ext)s`.
+  Po pobraniu nazwy przechodzą przez `nazwy.ps1` (transliteracja do ASCII,
+  usunięcie emoji, limit 110 znaków, prefiks `NNN - ` zachowany).
+  Wyłączenie: `-BezZmian`.
 - Archiwa playlist trzymaj w `downloads\.archives\<playlist_id>.txt`.
 - **Transkrypcje:** wynik to `transkrypcje\<kanał>\RRRR-MM-DD - <tytuł>.txt`
   z nagłówkiem `Title:` / `URL:` / `Published:` i separatorem 60 myślników.

@@ -21,6 +21,14 @@
         z sufiksem -DONE.txt (dopisywana na koncu, jesli plik juz istnieje),
         a oryginalny plik listy jest usuwany.
 
+    Nazwy plikow:
+      - Po pobraniu nazwy sa normalizowane do czystego ASCII (funkcja z pliku nazwy.ps1):
+        polskie znaki sa transliterowane, emoji/usuniete, separatory ujednolicone.
+      - Dzieki temu pliki sa widoczne na starych odtwarzaczach DVD/Blu-ray,
+        telewizorach z USB i udzialach DLNA/SMB.
+      - Wylacznik: -BezZmian (zostawia oryginalne tytuly z YouTube).
+      - Mapowanie zmian jest zapisywane w downloads\.archives\rename-*.csv.
+
     Dlawienie YouTube:
       - YouTube potrafi drastycznie dlawic strumienie DASH (np. bardzo dlugie filmy).
       - Dlatego dla pojedynczych filmow, jesli pierwsza proba sie nie powiedzie,
@@ -32,7 +40,8 @@
 
 param(
     [string]$ListFile = 'yt-list.txt',
-    [double]$MaxTotalGB = 0
+    [double]$MaxTotalGB = 0,
+    [switch]$BezZmian
 )
 
 $ErrorActionPreference = 'Stop'
@@ -41,6 +50,8 @@ $HlsFallbackForPlaylists = $false
 
 $root     = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ytdlp    = Join-Path $root 'yt-dlp.exe'
+$nazwyFn  = Join-Path $root 'nazwy.ps1'
+if (Test-Path -LiteralPath $nazwyFn) { . $nazwyFn }
 if ([System.IO.Path]::IsPathRooted($ListFile)) {
     $listFile = $ListFile
 } else {
@@ -153,6 +164,27 @@ Get-ChildItem $baseOut -Recurse -Filter *.part -File -ErrorAction SilentlyContin
     if ($_.Name -match '^(.*)\.f[0-9A-Za-z_-]+\.(mp4|m4a|webm|mp3)\.part$') {
         $final = Join-Path $_.DirectoryName ($matches[1] + '.mp4')
         if (Test-Path -LiteralPath $final) { Remove-Item -LiteralPath $_.FullName -Force -ErrorAction SilentlyContinue }
+    }
+}
+
+# Normalizacja nazw do czystego ASCII (zgodnosc ze starymi odtwarzaczami).
+if (-not $BezZmian) {
+    if (Get-Command Rename-ToSafeNames -ErrorAction SilentlyContinue) {
+        Write-Host ""
+        Write-Host "Normalizacja nazw plikow (ASCII)..." -ForegroundColor Cyan
+        $renameLog = Join-Path $archDir ("rename-{0}.csv" -f (Get-Date -Format 'yyyyMMdd-HHmmss'))
+        $renamed = @(Rename-ToSafeNames -Path $baseOut -Recurse -IncludeDirectories -Apply -LogPath $renameLog)
+        $okRenamed = @($renamed | Where-Object { $_.Status -eq 'OK' })
+        if ($okRenamed.Count -gt 0) {
+            Write-Host ("  zmieniono nazw: {0} (log: {1})" -f $okRenamed.Count, $renameLog) -ForegroundColor DarkGray
+        }
+        else {
+            Write-Host "  nazwy sa juz poprawne" -ForegroundColor DarkGray
+            Remove-Item -LiteralPath $renameLog -Force -ErrorAction SilentlyContinue
+        }
+    }
+    else {
+        Write-Host "Nie znaleziono nazwy.ps1 - pomijam normalizacje nazw." -ForegroundColor Yellow
     }
 }
 

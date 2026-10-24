@@ -29,6 +29,8 @@ pozostaje lokalna i jest ignorowana przez git.
 .\pobierz.ps1 yt-list2.txt
 # z limitem 10 GB przyrostu:
 .\pobierz.ps1 yt-list2.txt -MaxTotalGB 10
+# bez normalizacji nazw (oryginalne tytuły z YouTube):
+.\pobierz.ps1 yt-list2.txt -BezZmian
 ```
 
 Pliki trafią do `downloads\`. Po zakończeniu zawartość listy jest dopisywana do
@@ -59,6 +61,16 @@ pliku `*-DONE.txt`, a oryginalna lista jest usuwana (żeby nie pobierać jej pon
 - **Odporność:** `--continue`, 20 prób, 20 prób fragmentów, timeout gniazda 60 s.
 - **Porządki:** usuwa osierocone pliki `.part`, gdy finalny `.mp4` już istnieje,
   i wypisuje podsumowanie (sukces/błędy, liczba MP4, rozmiar w GB).
+- **Nazwy plików:** po pobraniu nazwy są normalizowane do czystego ASCII
+  (`nazwy.ps1`): polskie znaki są transliterowane, emoji i symbole usuwane,
+  separatory ujednolicone, długość ograniczona do 110 znaków (bez rozszerzenia).
+  Dzięki temu pliki są widoczne na starych odtwarzaczach DVD/Blu-ray,
+  telewizorach z USB i udziałach DLNA/SMB. Mapowanie zmian trafia do
+  `downloads\.archives\rename-*.csv`, więc każdą zmianę można cofnąć.
+  Wyłączenie: `-BezZmian`.
+
+  Przykład: `164 - Tiësto - Una Velita ｜ Extended Remix.mp4`
+  → `164 - Tiesto - Una Velita - Extended Remix.mp4`.
 
 ## Struktura projektu
 
@@ -66,6 +78,7 @@ pliku `*-DONE.txt`, a oryginalna lista jest usuwana (żeby nie pobierać jej pon
 yt/
 ├─ pobierz.ps1          # główny skrypt pobierający filmy
 ├─ transkrypcje.ps1     # pobieranie transkrypcji (napisy -> TXT)
+├─ nazwy.ps1            # normalizacja nazw plików do czystego ASCII
 ├─ yt-dlp.exe           # binarka yt-dlp (ignorowana przez git)
 ├─ yt-list.txt          # domyślna kolejka URL-i filmów (ignorowana przez git)
 ├─ transkrypcje-list.txt # kolejka URL-i do transkrypcji (ignorowana przez git)
@@ -133,6 +146,10 @@ Wynik:
 ```text
 transkrypcje\<kanał>\RRRR-MM-DD - <tytuł>.txt
 ```
+
+Nazwy katalogów i plików są normalizowane do ASCII tak samo jak w `pobierz.ps1`
+(transliteracja, bez emoji). Indeks wznawiania czyta nagłówek `URL:`, więc
+zmiana nazwy pliku nie powoduje ponownego pobierania.
 
 Zawartość pliku:
 

@@ -14,6 +14,10 @@
              <OutDir>\<kanal>\RRRR-MM-DD - <tytul>.txt
       4. pliki tymczasowe sa usuwane.
 
+    Nazwy katalogow i plikow sa normalizowane do czystego ASCII (nazwy.ps1):
+    polskie znaki transliterowane, emoji usuniete. Dzieki temu transkrypcje
+    otwieraja sie poprawnie takze na starych odtwarzaczach i telewizorach.
+
     Domyslna lista URL: transkrypcje-list.txt (ten sam format co yt-list.txt -
     jeden URL na linie, '#' rozpoczyna komentarz).
 
@@ -44,6 +48,9 @@ $ErrorActionPreference = 'Stop'
 
 $root  = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ytdlp = Join-Path $root 'yt-dlp.exe'
+$nazwyFn = Join-Path $root 'nazwy.ps1'
+if (-not (Test-Path -LiteralPath $nazwyFn)) { throw "Nie znaleziono: $nazwyFn" }
+. $nazwyFn
 
 if ([System.IO.Path]::IsPathRooted($ListFile)) {
     $listFile = $ListFile
@@ -101,15 +108,6 @@ function Import-ExistingTranscripts {
         }
     }
     Write-Host "  zaindeksowano $($script:archived.Count) transkrypcji" -ForegroundColor DarkGray
-}
-
-function ConvertTo-SafeName {
-    param([string]$Name, [int]$MaxLen = 120)
-    $n = [regex]::Replace($Name, '[\\/:*?"<>|\r\n\t]', ' ')
-    $n = [regex]::Replace($n, '\s+', ' ').Trim().Trim('.', ' ')
-    if ($n.Length -gt $MaxLen) { $n = $n.Substring(0, $MaxLen).TrimEnd() }
-    if (-not $n) { $n = 'untitled' }
-    return $n
 }
 
 function ConvertFrom-Vtt {
@@ -195,10 +193,10 @@ function Convert-Staged {
         $url = [string]$info.webpage_url
         if (-not $url) { $url = "https://www.youtube.com/watch?v=$id" }
 
-        $channelDir = Join-Path $outRoot (ConvertTo-SafeName $channel)
+        $channelDir = Join-Path $outRoot (ConvertTo-SafeFileName -Name $channel -MaxLength 60)
         New-Item -ItemType Directory -Force -Path $channelDir | Out-Null
 
-        $base   = "$date - $(ConvertTo-SafeName $title)"
+        $base   = "$date - $(ConvertTo-SafeFileName -Name $title -MaxLength 110)"
         $target = Join-Path $channelDir "$base.txt"
 
         if (Test-Path -LiteralPath $target) {
