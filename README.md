@@ -31,6 +31,8 @@ pozostaje lokalna i jest ignorowana przez git.
 .\pobierz.ps1 yt-list2.txt -MaxTotalGB 10
 # bez normalizacji nazw (oryginalne tytuły z YouTube):
 .\pobierz.ps1 yt-list2.txt -BezZmian
+# sprawdź i napraw kodeki także w plikach pobranych wcześniej:
+.\pobierz.ps1 yt-list2.txt -PelnySkanKodekow
 ```
 
 Pliki trafią do `downloads\`. Po zakończeniu zawartość listy jest dopisywana do
@@ -71,6 +73,28 @@ pliku `*-DONE.txt`, a oryginalna lista jest usuwana (żeby nie pobierać jej pon
 
   Przykład: `164 - Tiësto - Una Velita ｜ Extended Remix.mp4`
   → `164 - Tiesto - Una Velita - Extended Remix.mp4`.
+- **Kontrola kodeków:** po pobraniu każdy nowy plik jest sprawdzany `ffprobe`.
+  Jeśli obraz nie jest H.264 (`yuv420p`) albo dźwięk nie jest AAC, plik jest
+  transkodowany `ffmpeg`-em do zgodnego MP4 (H.264 Main, CRF 20). Wynik jest
+  weryfikowany przed podmianą — przy błędzie oryginał zostaje nietknięty.
+  Domyślnie sprawdzane są tylko pliki z bieżącego uruchomienia; pełny skan
+  włącza `-PelnySkanKodekow`, a wyłącza `-BezKodekow`.
+  Log: `downloads\.archives\kodeki-*.csv`.
+
+### Naprawa kodeków w istniejącej bibliotece
+
+`kodeki.ps1` można użyć samodzielnie — bez pobierania czegokolwiek:
+
+```powershell
+. .\kodeki.ps1
+Repair-MediaCodecs -Path downloads -Recurse                 # tylko raport
+Repair-MediaCodecs -Path downloads -Recurse -Apply          # transkoduje
+Repair-MediaCodecs -Path downloads -Recurse -Apply -KeepOriginal  # zostawia .orig
+```
+
+Transkodowanie dotyczy wyłącznie plików, które nie są H.264/AAC (np. VP9/AV1).
+Nazwy plików się nie zmieniają, a oryginał jest usuwany dopiero po pomyślnej
+weryfikacji wyniku.
 
 ## Struktura projektu
 
@@ -79,6 +103,7 @@ yt/
 ├─ pobierz.ps1          # główny skrypt pobierający filmy
 ├─ transkrypcje.ps1     # pobieranie transkrypcji (napisy -> TXT)
 ├─ nazwy.ps1            # normalizacja nazw plików do czystego ASCII
+├─ kodeki.ps1           # kontrola kodeków i transkodowanie do H.264 + AAC
 ├─ yt-dlp.exe           # binarka yt-dlp (ignorowana przez git)
 ├─ yt-list.txt          # domyślna kolejka URL-i filmów (ignorowana przez git)
 ├─ transkrypcje-list.txt # kolejka URL-i do transkrypcji (ignorowana przez git)

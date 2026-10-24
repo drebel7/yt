@@ -17,6 +17,9 @@ AAC, MP4), a nie maksymalna jakość. Nie ma tu testów, pakietu ani CI.
 - `nazwy.ps1` — wspólna normalizacja nazw do czystego ASCII
   (`ConvertTo-SafeFileName`, `Rename-ToSafeNames`). Używana przez oba skrypty;
   nie duplikuj tej logiki w `pobierz.ps1` ani `transkrypcje.ps1`.
+- `kodeki.ps1` — kontrola kodeków (`ffprobe`) i transkodowanie do H.264 + AAC
+  (`ffmpeg`): `Get-MediaInfo`, `ConvertTo-CompatibleMedia`, `Repair-MediaCodecs`.
+  Ten sam wymóg: nie duplikuj logiki w skryptach pobierających.
 - `README.md` — dokumentacja użytkownika (po polsku).
 - `opencode.jsonc` — konfiguracja lokalna OpenCode; zawiera bezwzględne ścieżki
   Windows i nie powinna być „poprawiana” bez powodu.
@@ -60,6 +63,11 @@ AAC, MP4), a nie maksymalna jakość. Nie ma tu testów, pakietu ani CI.
   usunięcie emoji, limit 110 znaków, prefiks `NNN - ` zachowany).
   Wyłączenie: `-BezZmian`.
 - Archiwa playlist trzymaj w `downloads\.archives\<playlist_id>.txt`.
+- **Kodeki:** po pobraniu `pobierz.ps1` sprawdza nowe pliki `ffprobe` i w razie
+  potrzeby transkoduje do H.264 (Main, yuv420p) + AAC w MP4. Nie usuwaj tego
+  kroku i nie zmieniaj kolejności (najpierw nazwy, potem kodeki). Wynik jest
+  zawsze weryfikowany przed podmianą; oryginał wolno usunąć tylko po sukcesie.
+  Logi trafiają do `downloads\.archives\kodeki-*.csv`.
 - **Transkrypcje:** wynik to `transkrypcje\<kanał>\RRRR-MM-DD - <tytuł>.txt`
   z nagłówkiem `Title:` / `URL:` / `Published:` i separatorem 60 myślników.
   Indeks `transkrypcje\.archives\subtitles.txt` jest odtwarzany z nagłówków
