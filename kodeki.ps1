@@ -114,7 +114,8 @@ function ConvertTo-CompatibleMedia {
 
         [int]$Crf = 20,
         [string]$Preset = 'fast',
-        [switch]$KeepOriginal
+        [switch]$KeepOriginal,
+        [int]$TimeoutMinutes = 60
     )
 
     Test-FfmpegAvailable
@@ -164,14 +165,58 @@ function ConvertTo-CompatibleMedia {
 
     $ffArgs += @($tmp)
 
+    # ffmpeg uruchamiamy przez System.Diagnostics.Process: wlasne cytowanie
+    # argumentow (sciezki ze spacjami!), asynchroniczny odczyt strumieni
+    # (brak blokady na potoku) i limit czasu na plik.
+    $argString = ($ffArgs | ForEach-Object {
+        $a = [string]$_
+        if ($a -match '\s') { '"' + $a + '"' } else { $a }
+    }) -join ' '
+
     $started = Get-Date
-    & ffmpeg @ffArgs
-    $code = $LASTEXITCODE
+    $timedOut = $false
+    $code = -1
+    $ffmpegMessage = ''
+
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName = (Get-Command ffmpeg -ErrorAction Stop).Source
+    $psi.Arguments = $argString
+    $psi.UseShellExecute = $false
+    $psi.CreateNoWindow = $true
+    $psi.RedirectStandardOutput = $true
+    $psi.RedirectStandardError = $true
+
+    $proc = New-Object System.Diagnostics.Process
+    $proc.StartInfo = $psi
+    [void]$proc.Start()
+    $outTask = $proc.StandardOutput.ReadToEndAsync()
+    $errTask = $proc.StandardError.ReadToEndAsync()
+
+    if (-not $proc.WaitForExit($TimeoutMinutes * 60 * 1000)) {
+        $timedOut = $true
+        try { $proc.Kill() } catch { }
+        try { $proc.WaitForExit(10000) | Out-Null } catch { }
+    }
+    else {
+        $code = $proc.ExitCode
+    }
     $elapsed = (Get-Date) - $started
+
+    try { [void]$outTask.Result } catch { }
+    try {
+        $errText = [string]$errTask.Result
+        $errLines = @($errText -split "`r?`n" | Where-Object { $_.Trim() })
+        if ($errLines.Count -gt 0) {
+            $ffmpegMessage = $errLines[$errLines.Count - 1].Trim()
+            if ($ffmpegMessage.Length -gt 140) { $ffmpegMessage = $ffmpegMessage.Substring(0, 140) }
+        }
+    }
+    catch { }
 
     if ($code -ne 0 -or -not (Test-Path -LiteralPath $tmp)) {
         if (Test-Path -LiteralPath $tmp) { Remove-Item -LiteralPath $tmp -Force -ErrorAction SilentlyContinue }
-        return [pscustomobject]@{ Name = (Split-Path -Leaf $Path); Status = 'ERROR'; Reason = "ffmpeg kod $code"; OldVideo = $info.VideoCodec; OldAudio = $info.AudioCodec; NewVideo = ''; NewAudio = ''; SizeMB = 0 }
+        $reason = if ($timedOut) { "przekroczono limit $TimeoutMinutes min" } elseif ($ffmpegMessage) { $ffmpegMessage } else { "ffmpeg kod $code" }
+        return [pscustomobject]@{ Name = (Split-Path -Leaf $Path); Status = 'ERROR'; Reason = $reason; OldVideo = $info.VideoCodec; OldAudio = $info.AudioCodec; NewVideo = ''; NewAudio = ''; SizeMB = 0 }
     }
 
     $check = Get-MediaInfo -Path $tmp
@@ -226,6 +271,7 @@ function Repair-MediaCodecs {
         [int]$Crf = 20,
         [string]$Preset = 'fast',
         [switch]$KeepOriginal,
+        [int]$TimeoutMinutes = 60,
         [string]$LogPath
     )
 
@@ -266,7 +312,7 @@ function Repair-MediaCodecs {
         }
 
         Write-Host ("  TRANSKOD  {0}  ({1})" -f $file.Name, $info.Reason) -ForegroundColor Cyan
-        $result = ConvertTo-CompatibleMedia -Path $file.FullName -Crf $Crf -Preset $Preset -KeepOriginal:$KeepOriginal
+        $result = ConvertTo-CompatibleMedia -Path $file.FullName -Crf $Crf -Preset $Preset -KeepOriginal:$KeepOriginal -TimeoutMinutes $TimeoutMinutes
         if ($result.Status -eq 'CONVERTED') {
             Write-Host ("  OK        {0}  ({1} MB, {2} s)" -f $result.Name, $result.SizeMB, $result.Seconds) -ForegroundColor Green
         }

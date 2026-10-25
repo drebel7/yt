@@ -113,7 +113,8 @@ function ConvertTo-SafeFileName {
                 [void]$buffer.Append(' - ')
                 continue
             }
-            if ($ch -eq '*' -or $ch -eq '"' -or $ch -eq '?' -or $ch -eq '<' -or $ch -eq '>' -or
+            if ($ch -eq '"') { [void]$buffer.Append(' '); continue }
+            if ($ch -eq '*' -or $ch -eq '?' -or $ch -eq '<' -or $ch -eq '>' -or
                 $ch -eq '^' -or $ch -eq '~' -or $ch -eq '`') {
                 continue
             }
@@ -173,7 +174,7 @@ function ConvertTo-SafeFileName {
     }
 
     $text = $buffer.ToString()
-    $text = $text -replace "['`"]", ''
+    $text = $text -replace "'", ''
     $text = $text -replace '\s+', ' '
     $text = $text.Trim()
 
@@ -185,8 +186,13 @@ function ConvertTo-SafeFileName {
     $text = $text -replace '^\s*-\s*', ''
     $text = $text -replace '\s*-\s*$', ''
     $text = $text -replace '\s+', ' '
+    # Wielokropek usuwamy przed porzadkami, zeby nie zostawial samotnej kropki.
+    $text = $text -replace '\.{3,}', ''
     $text = $text -replace '\s+\.', '.'
     $text = $text -replace '\.{2,}', '.'
+    # " - ...Tytul" -> " - Tytul", ".ukryty" -> "ukryty"
+    $text = $text -replace '(^|[\s\-]+)\.', '$1'
+    $text = $text -replace '\(\s*\)', ''
     $text = $text.Trim()
     $text = $text.TrimEnd('.', ' ', '-', '_')
 
