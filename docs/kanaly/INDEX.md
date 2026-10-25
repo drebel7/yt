@@ -61,6 +61,38 @@ Uwaga: **Medycyna Praktyczna** nie ma dużego, zweryfikowanego kanału YouTube �
 
 **Źródła chińskojęzyczne na YouTube:** odrzucone — kanały są zbyt małe, często nieoficjalne i trudne do zweryfikowania. Jeśli temat chiński będzie priorytetem, lepszym kierunkiem jest Bilibili, ale wymaga to osobnej obsługi napisów.
 
+## Źródła tematyczne: WZJG/IBD i JAK-STAT
+
+Priorytet bieżącego etapu. Źródła pacjenckie są dopuszczone, ale w raportach muszą być wyraźnie oznaczone jako **pacjenckie**, a nie kliniczne.
+
+### WZJG / colitis ulcerosa
+
+| Kanał | Typ | Język | Priorytet | Uwaga |
+| --- | --- | --- | --- | --- |
+| [Crohn's & Colitis Foundation](https://www.youtube.com/@CrohnsColitisFoundation) | organizacja pacjencka + edukacja | en | A | Dedykowany IBD, leczenie, badania |
+| [American College of Gastroenterology](https://www.youtube.com/@ACGastroenterology) | towarzystwo kliniczne | en | A | Wytyczne kliniczne |
+| [AGA](https://www.youtube.com/@AmerGastroAssn) | towarzystwo kliniczne | en | A | Gastroenterologia kliniczna |
+| [Poradnik Gastrologiczny](https://www.youtube.com/@poradnikgastrologiczny) | lekarz gastrolog | pl | A | Duży polski kanał GI |
+| [J-elita](https://www.youtube.com/@TowarzystwoJelita) | pacjenckie | pl | B | Oznaczyć jako pacjenckie |
+| [MedCast](https://www.youtube.com/@MedCast112) | edukacja medyczna | pl | B | Mały, wybrane filmy |
+| [Доктор Вялов](https://www.youtube.com/@DoctorVyalov) | gastroenterolog, popularyzacja | ru | A | Duży zasięg; weryfikować jakość |
+| [Гастроэнтерология](https://www.youtube.com/@Gastroscan24) | edukacja | ru | B | Wykłady i przypadki |
+| [МедЗнания](https://www.youtube.com/@MedqRu) | edukacja medyczna | ru | B | Konferencje i wykłady |
+| [Уголок Доктора](https://www.youtube.com/@professorAstvatsatryan) | wykłady | ru | B | Materiały wykładowe |
+| [СПбГастроГепа](https://www.youtube.com/@%D0%A1%D0%9F%D0%B1%D0%93%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%93%D0%B5%D0%BF%D0%B0-%D1%836%D1%8E) | konferencje | ru | C | Mały kanał |
+
+### JAK-STAT / inhibitory JAK
+
+| Kanał | Typ | Język | Priorytet | Uwaga |
+| --- | --- | --- | --- | --- |
+| [VJHemOnc](https://www.youtube.com/@VJHemOnc) | hematologia | en | A | Głównie MPN, myelofibrosis, ruxolitinib |
+| [American College of Rheumatology](https://www.youtube.com/@AmerCollRheumatology) | reumatologia | en | B | JAK w RZS |
+| [EULAR](https://www.youtube.com/@eularorg) | reumatologia | en | B | Wytyczne europejskie |
+| [American Academy of Dermatology](https://www.youtube.com/@AADskin) | dermatologia | en | B | JAK w AZS i łysieniu plackowatym |
+| Crohn's / ACG / AGA | gastroenterologia | en | A | JAK w IBD: tofacitinib, upadacitinib, filgotinib |
+
+**Rosyjski JAK-STAT:** brak wiarygodnego, dedykowanego kanału. Pojedyncze materiały mogą pojawić się w kanałach gastroenterologicznych i wykładowych; traktować jako uzupełnienie, nie podstawę.
+
 ## Jak dodawać propozycje do kolejki
 
 1. Wybierz kanał i sprawdź `@handle/videos`.
