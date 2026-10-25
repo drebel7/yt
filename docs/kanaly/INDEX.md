@@ -1,6 +1,6 @@
-# Spis kanałów z transkrypcjami
+# Spis kanałów i propozycji tematycznych
 
-Rejestr kanałów, z których pobrano transkrypcje. Zawiera wyłącznie metadane — **treść transkrypcji i szczegółowe indeksy filmów pozostają lokalne** (katalog `transkrypcje/` jest ignorowany przez git).
+Rejestr kanałów, z których pobrano transkrypcje, oraz lista propozycji na przyszłość. Zawiera wyłącznie metadane — **treść transkrypcji i szczegółowe indeksy filmów pozostają lokalne** (katalog `transkrypcje/` jest ignorowany przez git).
 
 | Kanał | Kategoria | Tematyka | Język | Transkrypcje | Zakres |
 | --- | --- | --- | --- | ---: | --- |
@@ -19,4 +19,49 @@ Rejestr kanałów, z których pobrano transkrypcje. Zawiera wyłącznie metadane
 | [Uniwersytet Medyczny w Lublinie (UMLub)](https://www.youtube.com/c/UMLub24) | edukacja medyczna | Wykłady medyczne, farmakologia, neurologia, zdrowie publiczne | polski (pl) | 171 | 2019-01-18 – 2026-10-22 |
 | [Warszawski Uniwersytet Medyczny](https://www.youtube.com/channel/UCGVyo888UbDX7CIjOhO58Yw) | edukacja medyczna | Edukacja medyczna, zdrowie publiczne, wywiady z ekspertami | polski (pl) | 169 | 2018-10-12 – 2026-10-01 |
 
-**Razem:** 14 kanałów, 6176 transkrypcji.
+**Razem pobrane:** 14 kanałów, 6176 transkrypcji.
+
+## Propozycje do pobrania w przyszłości
+
+Kanały jeszcze niepobrane. Przed dodaniem do kolejki sprawdzić liczbę filmów i dostępność napisów (`pl`/`en`); kanały czasopism często publikują krótkie klipy, a nie pełne artykuły.
+
+Legenda priorytetu: **A** — zacząć od nich, **B** — dobre uzupełnienie, **C** — opcjonalne.
+
+| Kanał | Kategoria | Tematyka | Język | Priorytet |
+| --- | --- | --- | --- | --- |
+| [Mayo Clinic](https://www.youtube.com/@MayoClinic) | edukacja pacjenta | Objawy, choroby, procedury, profilaktyka | angielski (en) | A |
+| [Cleveland Clinic](https://www.youtube.com/@ClevelandClinic) | edukacja pacjenta | Choroby, leczenie, zdrowie publiczne | angielski (en) | A |
+| [Johns Hopkins Medicine](https://www.youtube.com/@JohnsHopkinsMedicine) | medycyna kliniczna | Choroby, diagnostyka, badania kliniczne | angielski (en) | A |
+| [Harvard Health](https://www.youtube.com/@HarvardHealth) | zdrowie oparte na dowodach | Profilaktyka, styl życia, interpretacja badań | angielski (en) | B |
+| [NHS](https://www.youtube.com/@NHS) | edukacja pacjenta | Zdrowie publiczne, objawy, ścieżki leczenia | angielski (en) | B |
+| [CDC](https://www.youtube.com/@CDC) | zdrowie publiczne | Epidemiologia, choroby zakaźne, szczepienia | angielski (en) | B |
+| [JAMA Network](https://www.youtube.com/@JAMAnetwork) | czasopismo medyczne | Przeglądy kliniczne, wywiady, komentarze do badań | angielski (en) | A |
+| [The BMJ](https://www.youtube.com/@TheBMJ) | czasopismo medyczne | Medycyna kliniczna, debata naukowa, wytyczne | angielski (en) | B |
+| [American Family Physician](https://www.youtube.com/@AFPJournal) | medycyna rodzinna | Praktyczne podsumowania dla lekarzy rodzinnych | angielski (en) | A |
+| [The Curbsiders](https://www.youtube.com/@TheCurbsiders) | podcast internistyczny | Praktyczna farmakoterapia i przypadki kliniczne | angielski (en) | A |
+| [Healthcare Triage](https://www.youtube.com/@HealthcareTriage) | krytyczna analiza | Badania, polityka zdrowotna, mity medyczne | angielski (en) | B |
+| [Medlife Crisis](https://www.youtube.com/@MedlifeCrisis) | popularyzacja medycyny | Sceptyczne wyjaśnienia tematów medycznych | angielski (en) | C |
+| [Osmosis](https://www.youtube.com/@osmosis) | edukacja medyczna | Mechanizmy chorób, patofizjologia, klinika | angielski (en) | A |
+| [Ninja Nerd](https://www.youtube.com/@NinjaNerdOfficial) | edukacja medyczna | Fizjologia i patofizjologia w dużym detalu | angielski (en) | A |
+| [Armando Hasudungan](https://www.youtube.com/@ArmandoHasudungan) | edukacja medyczna | Rysunkowe omówienia chorób i mechanizmów | angielski (en) | B |
+| [Zero To Finals](https://www.youtube.com/@ZeroToFinals) | edukacja medyczna | Medycyna kliniczna dla studentów | angielski (en) | A |
+| [Geeky Medics](https://www.youtube.com/@GeekyMedics) | edukacja medyczna | Badanie kliniczne, procedury, OSCE | angielski (en) | B |
+| [American Migraine Foundation](https://www.youtube.com/@AmericanMigraineFoundation) | neurologia | Migrena, leczenie, edukacja pacjentów | angielski (en) | A |
+| [Migraine World Summit](https://www.youtube.com/@MigraineWorldSummit) | neurologia | Wywiady ze specjalistami od migreny i bólu głowy | angielski (en) | A |
+| [International Headache Society](https://www.youtube.com/@IHSheadache) | neurologia | Ból głowy, migrena, materiały kongresowe | angielski (en) | B |
+| [The Brain Docs](https://www.youtube.com/@TheBrainDocs) | zdrowie mózgu | Profilaktyka neurologiczna i styl życia | angielski (en) | C |
+| [Nutrition Made Simple!](https://www.youtube.com/@NutritionMadeSimple) | dietetyka oparta na dowodach | Krytyczna analiza badań dietetycznych | angielski (en) | A |
+| [Physionic](https://www.youtube.com/@Physionic) | dietetyka i metabolizm | Badania nad dietą, metabolizmem i treningiem | angielski (en) | B |
+| [Medycyna Praktyczna](https://www.youtube.com/@MedycynaPraktyczna) | medycyna kliniczna | Webinary, wytyczne, praktyka kliniczna | polski (pl) | A |
+| [Gdański Uniwersytet Medyczny](https://www.youtube.com/@GdanskiUniwersytetMedyczny) | edukacja medyczna | Wykłady i konferencje GUMed | polski (pl) | B |
+| [Uniwersytet Medyczny w Łodzi](https://www.youtube.com/@UniwersytetMedycznywLodzi) | edukacja medyczna | Wykłady i konferencje UM w Łodzi | polski (pl) | B |
+| [Śląski Uniwersytet Medyczny](https://www.youtube.com/@SUMKatowice) | edukacja medyczna | Wykłady i konferencje ŚUM | polski (pl) | B |
+| [Polskie Towarzystwo Kardiologiczne](https://www.youtube.com/@PTKardio) | kardiologia | Wytyczne, webinary, edukacja kardiologiczna | polski (pl) | B |
+
+## Jak dodawać propozycje do kolejki
+
+1. Wybierz kanał i sprawdź `@handle/videos`.
+2. Dopisz URL do osobnego pliku `transkrypcje-list-<nazwa>.txt`.
+3. Uruchom `.\transkrypcje.ps1 transkrypcje-list-<nazwa>.txt -Lang pl` lub `-Lang en`.
+4. Po pobraniu dopisz kanał do tabeli „pobrane” i zaktualizuj indeks.
+
