@@ -56,6 +56,7 @@ def main():
     parser.add_argument("--out", help="output Markdown path")
     parser.add_argument("--json", help="optional JSON output path")
     parser.add_argument("--label", help="human-readable topic label for the heading")
+    parser.add_argument("--case-sensitive", action="store_true", help="match case-sensitively")
     args = parser.parse_args()
 
     root = os.path.abspath(args.root)
@@ -64,7 +65,7 @@ def main():
     os.makedirs(out_dir, exist_ok=True)
 
     try:
-        regex = re.compile(args.pattern, re.IGNORECASE)
+        regex = re.compile(args.pattern, 0 if args.case_sensitive else re.IGNORECASE)
     except re.error as exc:
         print(f"error: invalid regex: {exc}", file=sys.stderr)
         return 2
@@ -123,7 +124,7 @@ def main():
         "",
         "Deterministic regex search (no LLM) over transcript files.",
         "",
-        f"- **Pattern:** `{args.pattern}` (case-insensitive)",
+        f"- **Pattern:** `{args.pattern}` ({'case-sensitive' if args.case_sensitive else 'case-insensitive'})",
         f"- **Root:** `{os.path.relpath(root, os.getcwd()).replace(os.sep, '/')}`",
         f"- **Files with matches:** {len(rows)}",
         f"- **Total matches:** {total_hits}",
@@ -172,6 +173,7 @@ def main():
                     "topic": args.topic,
                     "label": label,
                     "pattern": args.pattern,
+                    "case_sensitive": args.case_sensitive,
                     "root": root,
                     "generated": date.today().isoformat(),
                     "files": len(rows),

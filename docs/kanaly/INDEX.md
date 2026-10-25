@@ -2,6 +2,8 @@
 
 Rejestr kanałów, z których pobrano transkrypcje, oraz lista propozycji na przyszłość. Zawiera wyłącznie metadane — **treść transkrypcji i szczegółowe indeksy filmów pozostają lokalne** (katalog `transkrypcje/` jest ignorowany przez git).
 
+### Kanały pobrane wcześniej
+
 | Kanał | Kategoria | Tematyka | Język | Transkrypcje | Zakres |
 | --- | --- | --- | --- | ---: | --- |
 | [Qullamaggie (Kristjan Kullamägi)](https://www.youtube.com/@Qullamaggie) | trading | Momentum, breakouts, EP/ORB, psychologia tradingu | angielski (en) | 443 | 2017-02-01 – 2023-12-15 |
@@ -19,9 +21,31 @@ Rejestr kanałów, z których pobrano transkrypcje, oraz lista propozycji na prz
 | [Uniwersytet Medyczny w Lublinie (UMLub)](https://www.youtube.com/c/UMLub24) | edukacja medyczna | Wykłady medyczne, farmakologia, neurologia, zdrowie publiczne | polski (pl) | 171 | 2019-01-18 – 2026-10-22 |
 | [Warszawski Uniwersytet Medyczny](https://www.youtube.com/channel/UCGVyo888UbDX7CIjOhO58Yw) | edukacja medyczna | Edukacja medyczna, zdrowie publiczne, wywiady z ekspertami | polski (pl) | 169 | 2018-10-12 – 2026-10-01 |
 
-**Razem pobrane:** 14 kanałów, 6176 transkrypcji.
+**Razem pobrane:** 29 kanałów, 7219 transkrypcji.
+
+### Pobrane w ramach priorytetu WZJG/JAK
+
+| Kanał | Temat | Transkrypcje | Uwaga |
+| --- | --- | ---: | --- |
+| Crohn's & Colitis Foundation | WZJG/IBD/JAK | 465 | kliniczny + pacjencki |
+| Mayo Clinic | WZJG/IBD | 147 | kliniczny |
+| AGA | WZJG/IBD | 61 | kliniczny |
+| Cleveland Clinic | WZJG/IBD | 17 | kliniczny |
+| Johns Hopkins Medicine | WZJG/IBD | 12 | kliniczny |
+| The Curbsiders | WZJG/IBD | 4 | podcast kliniczny |
+| Osmosis | WZJG/mechanizmy | 2 | edukacja medyczna |
+| VJHemOnc | JAK-STAT/MPN | 203 | hematologia |
+| MedCast | WZJG/IBD | 71 | edukacja medyczna PL |
+| Poradnik Gastrologiczny | WZJG/IBD | 5 | lekarz gastrolog PL |
+| Towarzystwo J-elita | WZJG/IBD | 6 | **pacjenckie** |
+| Доктор Вялов | WZJG/IBD | 40 | popularyzacja RU; weryfikować |
+| Уголок Доктора | WZJG/IBD | 7 | wykłady RU |
+| МедЗнания | WZJG/endoskopia | 2 | edukacja medyczna RU |
+| СПбГастроГепа | WZJG | 1 | konferencja RU |
 
 ## Propozycje do pobrania w przyszłości
+
+Część poniższych kanałów została już pobrana w ramach priorytetu WZJG/JAK (patrz tabela wyżej). Pozostałe są listą rezerwową.
 
 Kanały jeszcze niepobrane. Przed dodaniem do kolejki sprawdzić liczbę filmów i dostępność napisów (`pl`/`en`); kanały czasopism często publikują krótkie klipy, a nie pełne artykuły.
 
