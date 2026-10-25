@@ -12,6 +12,7 @@
       2. skrypt czysci VTT (usuwa znaczniki czasu, tagi, duplikaty),
       3. zapisuje transkrypcje jako TXT w katalogu kanalu:
              <OutDir>\<kanal>\RRRR-MM-DD - <tytul>.txt
+         z naglowkiem Title/URL/Published/Language;
       4. pliki tymczasowe sa usuwane.
 
     Nazwy katalogow i plikow sa normalizowane do czystego ASCII (nazwy.ps1):
@@ -172,6 +173,14 @@ function Convert-Staged {
             continue
         }
 
+        # Jezyk wybieramy z faktycznie pobranego pliku VTT (moze byc inny niz
+        # lista -Lang, np. przy wielu wariantach jezykowych).
+        $language = $Lang
+        if ($vtts[0].Name -match ('^' + [regex]::Escape($id) + '\.(.+)\.vtt$')) {
+            $language = $matches[1]
+        }
+        if (-not $language) { $language = $Lang }
+
         $title = [string]$info.title
         if (-not $title) { $title = $id }
 
@@ -221,7 +230,7 @@ function Convert-Staged {
                 else {
                     $body = $raw
                 }
-                $content = "Title: $title`nURL: $url`nPublished: $date`n" + ('-' * 60) + "`n`n" + $body
+                $content = "Title: $title`nURL: $url`nPublished: $date`nLanguage: $language`n" + ('-' * 60) + "`n`n" + $body
                 [System.IO.File]::WriteAllText($target, $content, $utf8)
                 $script:existing++
                 Add-ArchiveId $id
@@ -234,7 +243,7 @@ function Convert-Staged {
             $target = Join-Path $channelDir "$base [$id].txt"
         }
 
-        $content = "Title: $title`nURL: $url`nPublished: $date`n" + ('-' * 60) + "`n`n" + $text
+        $content = "Title: $title`nURL: $url`nPublished: $date`nLanguage: $language`n" + ('-' * 60) + "`n`n" + $text
         [System.IO.File]::WriteAllText($target, $content, $utf8)
         Add-ArchiveId $id
         $script:ok++

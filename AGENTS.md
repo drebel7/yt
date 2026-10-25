@@ -69,7 +69,9 @@ AAC, MP4), a nie maksymalna jakość. Nie ma tu testów, pakietu ani CI.
   zawsze weryfikowany przed podmianą; oryginał wolno usunąć tylko po sukcesie.
   Logi trafiają do `downloads\.archives\kodeki-*.csv`.
 - **Transkrypcje:** wynik to `transkrypcje\<kanał>\RRRR-MM-DD - <tytuł>.txt`
-  z nagłówkiem `Title:` / `URL:` / `Published:` i separatorem 60 myślników.
+  z nagłówkiem `Title:` / `URL:` / `Published:` / `Language:` i separatorem
+  60 myślników. Pole `Language:` zapisuje kod języka faktycznie pobranych
+  napisów (np. `pl`, `en`, `ru`, `zh-Hans`).
   Indeks `transkrypcje\.archives\subtitles.txt` jest odtwarzany z nagłówków
   `URL:` przy każdym uruchomieniu — nie usuwaj tej linii z plików.
   Pliki VTT/JSON w `.staging` są tymczasowe i zawsze sprzątane po konwersji.

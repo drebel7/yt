@@ -59,6 +59,8 @@ Legenda priorytetu: **A** — zacząć od nich, **B** — dobre uzupełnienie, *
 
 Uwaga: **Medycyna Praktyczna** nie ma dużego, zweryfikowanego kanału YouTube — w tym przypadku lepiej korzystać bezpośrednio z `mp.pl`.
 
+**Źródła chińskojęzyczne na YouTube:** odrzucone — kanały są zbyt małe, często nieoficjalne i trudne do zweryfikowania. Jeśli temat chiński będzie priorytetem, lepszym kierunkiem jest Bilibili, ale wymaga to osobnej obsługi napisów.
+
 ## Jak dodawać propozycje do kolejki
 
 1. Wybierz kanał i sprawdź `@handle/videos`.

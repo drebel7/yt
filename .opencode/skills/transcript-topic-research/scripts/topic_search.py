@@ -14,11 +14,11 @@ from datetime import date
 
 
 def read_header(path):
-    """Return (title, url, published) from the first lines of a transcript."""
-    title = url = published = ""
+    """Return (title, url, published, language) from a transcript header."""
+    title = url = published = language = ""
     try:
         with open(path, encoding="utf-8", errors="replace") as handle:
-            for _ in range(6):
+            for _ in range(8):
                 line = handle.readline()
                 if not line:
                     break
@@ -29,9 +29,11 @@ def read_header(path):
                     url = line[5:].strip()
                 elif line.startswith("Published: "):
                     published = line[11:].strip()
+                elif line.startswith("Language: "):
+                    language = line[10:].strip()
     except OSError as exc:
         print(f"warning: cannot read {path}: {exc}", file=sys.stderr)
-    return title, url, published
+    return title, url, published, language
 
 
 def iter_transcripts(root):
@@ -84,7 +86,7 @@ def main():
         if not hits:
             continue
 
-        title, url, published = read_header(path)
+        title, url, published, language = read_header(path)
         channel = os.path.basename(os.path.dirname(path)) or "root"
         if not title:
             title = os.path.splitext(os.path.basename(path))[0]
@@ -98,6 +100,7 @@ def main():
                 "channel": channel,
                 "title": title,
                 "url": url,
+                "language": language,
                 "hits": hits,
                 "path": path,
                 "link": rel_link,
@@ -139,8 +142,8 @@ def main():
             "",
             "## Files",
             "",
-            "| Date | Channel | Title | Hits | File |",
-            "| --- | --- | --- | ---: | --- |",
+            "| Date | Channel | Title | Language | Hits | File |",
+            "| --- | --- | --- | --- | ---: | --- |",
         ]
     )
     for row in rows:
@@ -151,7 +154,7 @@ def main():
         else:
             title_cell = title
         lines.append(
-            f"| {row['date']} | {md_cell(row['channel'])} | {title_cell} | {row['hits']} | `{row['link']}` |"
+            f"| {row['date']} | {md_cell(row['channel'])} | {title_cell} | {md_cell(row['language'] or '?')} | {row['hits']} | `{row['link']}` |"
         )
 
     if not rows:

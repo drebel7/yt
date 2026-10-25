@@ -182,10 +182,14 @@ Zawartość pliku:
 Title: Market mechanics, setups and more
 URL: https://www.youtube.com/watch?v=...
 Published: 2023-06-09
+Language: en
 ------------------------------------------------------------
 
 <tekst transkrypcji w jednej linii>
 ```
+
+Pole `Language:` zawiera kod języka faktycznie pobranych napisów (np. `pl`,
+`en`, `ru`, `zh-Hans`).
 
 ### Wznawianie i duplikaty
 
