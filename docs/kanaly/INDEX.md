@@ -21,7 +21,7 @@ Rejestr kanałów, z których pobrano transkrypcje, oraz lista propozycji na prz
 | [Uniwersytet Medyczny w Lublinie (UMLub)](https://www.youtube.com/c/UMLub24) | edukacja medyczna | Wykłady medyczne, farmakologia, neurologia, zdrowie publiczne | polski (pl) | 171 | 2019-01-18 – 2026-10-22 |
 | [Warszawski Uniwersytet Medyczny](https://www.youtube.com/channel/UCGVyo888UbDX7CIjOhO58Yw) | edukacja medyczna | Edukacja medyczna, zdrowie publiczne, wywiady z ekspertami | polski (pl) | 169 | 2018-10-12 – 2026-10-01 |
 
-**Razem pobrane:** 29 kanałów, 7219 transkrypcji.
+**Razem pobrane:** 88 kanałów, 7338 transkrypcji.
 
 ### Pobrane w ramach priorytetu WZJG/JAK
 
@@ -42,6 +42,36 @@ Rejestr kanałów, z których pobrano transkrypcje, oraz lista propozycji na prz
 | Уголок Доктора | WZJG/IBD | 7 | wykłady RU |
 | МедЗнания | WZJG/endoskopia | 2 | edukacja medyczna RU |
 | СПбГастроГепа | WZJG | 1 | konferencja RU |
+
+### Pobrane w ramach priorytetu reumatologia/JAK
+
+| Kanał | Temat | Transkrypcje | Uwaga |
+| --- | --- | ---: | --- |
+| The Immune-Mediated Inflammatory Disease Forum | JAK/reumatologia | 22 | materiały konferencyjne |
+| RheumNow | JAK/reumatologia | 16 | bezpieczeństwo, wywiady |
+| RhAPP Digital | JAK/reumatologia | 5 | edukacja praktyczna |
+| HCPLive | reumatologia/PsA | 4 | wywiady ekspertów |
+| MD Newsline | reumatologia | 4 | edukacja |
+| Johns Hopkins Rheumatology | RZS | 3 | kliniczny |
+| Decera Clinical Education | JAK | 3 | edukacja |
+| GoodRx | pacjenckie | 3 | oznaczyć jako pacjenckie |
+| JCAD | upadacitinib/AZS | 2 | dermatologia |
+| Dermatology Times | upadacitinib | 2 | dermatologia |
+| Dermsquared | JAK/dermatologia | 2 | dermatologia |
+| TalkMED Congress Updates | JAK | 2 | kongres |
+| Pure Rheumatology London | JAK/RZS | 1 | kliniczny |
+| Dr. Diana Girnita | JAK/RZS | 1 | edukacja pacjenta |
+| Dr. Ananta Subedi | JAK/RZS | 1 | edukacja pacjenta |
+| Dr. Rob Swanda | upadacitinib | 1 | mechanizm |
+| AlbertaRheumatology | JAK | 1 | edukacja |
+| PeerView CME | JAK/RZS | 1 | CME |
+| MedPage Today | JAK | 1 | dziennikarstwo medyczne |
+| Mechanisms in Medicine | JAK | 1 | mechanizm |
+| Armando Hasudungan | JAK | 1 | mechanizm |
+| SJIAFoundation | JAK/JIA | 1 | pediatria |
+| HMP Global | JAK | 1 | edukacja |
+
+Pozostałe nowe kanały (głównie pojedyncze filmy) są w katalogu `transkrypcje/`; indeks tematyczny: `docs/tematy/jak-stat-reumatologia/INDEX.md`.
 
 ## Propozycje do pobrania w przyszłości
 
