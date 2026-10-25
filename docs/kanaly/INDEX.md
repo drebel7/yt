@@ -52,11 +52,12 @@ Legenda priorytetu: **A** — zacząć od nich, **B** — dobre uzupełnienie, *
 | [The Brain Docs](https://www.youtube.com/@TheBrainDocs) | zdrowie mózgu | Profilaktyka neurologiczna i styl życia | angielski (en) | C |
 | [Nutrition Made Simple!](https://www.youtube.com/@NutritionMadeSimple) | dietetyka oparta na dowodach | Krytyczna analiza badań dietetycznych | angielski (en) | A |
 | [Physionic](https://www.youtube.com/@Physionic) | dietetyka i metabolizm | Badania nad dietą, metabolizmem i treningiem | angielski (en) | B |
-| [Medycyna Praktyczna](https://www.youtube.com/@MedycynaPraktyczna) | medycyna kliniczna | Webinary, wytyczne, praktyka kliniczna | polski (pl) | A |
 | [Gdański Uniwersytet Medyczny](https://www.youtube.com/@GdanskiUniwersytetMedyczny) | edukacja medyczna | Wykłady i konferencje GUMed | polski (pl) | B |
 | [Uniwersytet Medyczny w Łodzi](https://www.youtube.com/@UniwersytetMedycznywLodzi) | edukacja medyczna | Wykłady i konferencje UM w Łodzi | polski (pl) | B |
 | [Śląski Uniwersytet Medyczny](https://www.youtube.com/@SUMKatowice) | edukacja medyczna | Wykłady i konferencje ŚUM | polski (pl) | B |
 | [Polskie Towarzystwo Kardiologiczne](https://www.youtube.com/@PTKardio) | kardiologia | Wytyczne, webinary, edukacja kardiologiczna | polski (pl) | B |
+
+Uwaga: **Medycyna Praktyczna** nie ma dużego, zweryfikowanego kanału YouTube — w tym przypadku lepiej korzystać bezpośrednio z `mp.pl`.
 
 ## Jak dodawać propozycje do kolejki
 
