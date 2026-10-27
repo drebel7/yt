@@ -21,7 +21,7 @@ Rejestr kanałów, z których pobrano transkrypcje, oraz lista propozycji na prz
 | [Uniwersytet Medyczny w Lublinie (UMLub)](https://www.youtube.com/c/UMLub24) | edukacja medyczna | Wykłady medyczne, farmakologia, neurologia, zdrowie publiczne | polski (pl) | 171 | 2019-01-18 – 2026-10-22 |
 | [Warszawski Uniwersytet Medyczny](https://www.youtube.com/channel/UCGVyo888UbDX7CIjOhO58Yw) | edukacja medyczna | Edukacja medyczna, zdrowie publiczne, wywiady z ekspertami | polski (pl) | 169 | 2018-10-12 – 2026-10-01 |
 
-**Razem pobrane:** 90 kanałów, 10956 transkrypcji.
+**Razem pobrane:** 97 kanałów, 13226 transkrypcji.
 
 ### Pobrane w ramach kategorii A (long-form)
 
@@ -29,10 +29,16 @@ Rejestr kanałów, z których pobrano transkrypcje, oraz lista propozycji na prz
 | --- | ---: | --- |
 | JAMA Network | 1376 | czasopismo |
 | AGA | 1050 | towarzystwo kliniczne |
-| Crohn's & Colitis Foundation | 772 | IBD |
-| The Curbsiders | 551 | podcast kliniczny |
-| Poradnik Gastrologiczny | 328 | lekarz gastrolog PL |
-| American Family Physician | 66 | medycyna rodzinna |
+| Crohn's & Colitis Foundation | 801 | IBD |
+| Доктор Вялов | 757 | gastroenterologia RU |
+| Ninja Nerd | 621 | mechanizmy/fizjologia |
+| The Curbsiders | 564 | podcast kliniczny |
+| Nutrition Made Simple! | 382 | dietetyka evidence-based |
+| Poradnik Gastrologiczny | 330 | lekarz gastrolog PL |
+| American Migraine Foundation | 254 | migrena, pacjenckie |
+| Zero To Finals | 172 | edukacja medyczna |
+| American Family Physician | 75 | medycyna rodzinna |
+| Migraine World Summit | 73 | migrena, pacjenckie |
 | American College of Gastroenterology | 0 | wszystkie wybrane filmy bez napisów |
 
 ### Pobrane w ramach priorytetu WZJG/JAK
