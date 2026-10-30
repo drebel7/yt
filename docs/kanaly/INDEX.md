@@ -21,14 +21,14 @@ Rejestr kanałów, z których pobrano transkrypcje, oraz lista propozycji na prz
 | [Uniwersytet Medyczny w Lublinie (UMLub)](https://www.youtube.com/c/UMLub24) | edukacja medyczna | Wykłady medyczne, farmakologia, neurologia, zdrowie publiczne | polski (pl) | 171 | 2019-01-18 – 2026-10-22 |
 | [Warszawski Uniwersytet Medyczny](https://www.youtube.com/channel/UCGVyo888UbDX7CIjOhO58Yw) | edukacja medyczna | Edukacja medyczna, zdrowie publiczne, wywiady z ekspertami | polski (pl) | 169 | 2018-10-12 – 2026-10-01 |
 
-**Razem pobrane:** 97 kanałów, 13226 transkrypcji.
+**Razem pobrane:** 97 kanałów, 14905 transkrypcji.
 
 ### Pobrane w ramach kategorii A (long-form)
 
 | Kanał | Transkrypcje | Uwaga |
 | --- | ---: | --- |
-| JAMA Network | 1376 | czasopismo |
-| AGA | 1050 | towarzystwo kliniczne |
+| JAMA Network | 1390 | czasopismo |
+| AGA | 1077 | towarzystwo kliniczne |
 | Crohn's & Colitis Foundation | 801 | IBD |
 | Доктор Вялов | 757 | gastroenterologia RU |
 | Ninja Nerd | 621 | mechanizmy/fizjologia |
