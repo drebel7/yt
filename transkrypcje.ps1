@@ -48,10 +48,16 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $root  = Split-Path -Parent $MyInvocation.MyCommand.Path
-$ytdlp = Join-Path $root 'yt-dlp.exe'
 $nazwyFn = Join-Path $root 'nazwy.ps1'
 if (-not (Test-Path -LiteralPath $nazwyFn)) { throw "Nie znaleziono: $nazwyFn" }
 . $nazwyFn
+
+# Cross-platform: Windows -> yt-dlp.exe, Linux/macOS -> yt-dlp
+if ($IsWindows) {
+    $ytdlpLocal = Join-Path $root 'yt-dlp.exe'
+} else {
+    $ytdlpLocal = Join-Path $root 'yt-dlp'
+}
 
 if ([System.IO.Path]::IsPathRooted($ListFile)) {
     $listFile = $ListFile
@@ -69,7 +75,13 @@ $archDir = Join-Path $outRoot '.archives'
 $archive = Join-Path $archDir 'subtitles.txt'
 $utf8    = New-Object System.Text.UTF8Encoding($false)
 
-if (-not (Test-Path -LiteralPath $ytdlp))    { throw "Nie znaleziono: $ytdlp" }
+if (-not (Test-Path -LiteralPath $ytdlpLocal)) {
+    $ytdlpCmd = Get-Command 'yt-dlp' -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($ytdlpCmd) { $ytdlp = $ytdlpCmd.Source }
+    else { throw "Nie znaleziono yt-dlp (lokalnie ani w PATH)" }
+} else {
+    $ytdlp = $ytdlpLocal
+}
 if (-not (Test-Path -LiteralPath $listFile)) { throw "Nie znaleziono: $listFile" }
 
 New-Item -ItemType Directory -Force -Path $stage, $archDir | Out-Null

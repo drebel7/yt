@@ -5,8 +5,9 @@ Wskazówki dla agentów AI pracujących w tym repozytorium.
 ## Czym jest ten projekt
 
 Mały, jednoplikowy projekt PowerShell do pobierania filmów/playlist z YouTube
-przez `yt-dlp.exe`. Celem jest zgodność ze starymi telewizorami (720p, H.264,
-AAC, MP4), a nie maksymalna jakość. Nie ma tu testów, pakietu ani CI.
+przez `yt-dlp` (cross-platform: `yt-dlp.exe` na Windows, `yt-dlp` na Linux/macOS).
+Celem jest zgodność ze starymi telewizorami (720p, H.264, AAC, MP4), a nie
+maksymalna jakość. Nie ma tu testów, pakietu ani CI.
 
 ## Najważniejsze pliki
 

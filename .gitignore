@@ -13,6 +13,7 @@
 # Binaria i narzedzia lokalne (za duze / instalowane osobno)
 # ---------------------------------------------------------------------------
 /yt-dlp.exe
+/yt-dlp
 /ffmpeg.exe
 /ffprobe.exe
 *.exe
