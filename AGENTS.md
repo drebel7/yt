@@ -21,8 +21,8 @@ AAC, MP4), a nie maksymalna jakość. Nie ma tu testów, pakietu ani CI.
   (`ffmpeg`): `Get-MediaInfo`, `ConvertTo-CompatibleMedia`, `Repair-MediaCodecs`.
   Ten sam wymóg: nie duplikuj logiki w skryptach pobierających.
 - `README.md` — dokumentacja użytkownika (po polsku).
-- `opencode.jsonc` — konfiguracja lokalna OpenCode; zawiera bezwzględne ścieżki
-  Windows i nie powinna być „poprawiana” bez powodu.
+- `opencode.jsonc` — projektowe nadpisanie modelu OpenCode; provider i MCP są
+  w globalnym `~/.config/opencode/opencode.jsonc`.
 - `transkrypcje/` — transkrypcje TXT (tylko lokalne, ignorowane przez git),
   m.in. 443 pliki kanału Qullamaggie. `transkrypcje/.staging` i `.archives` to
   pliki robocze.

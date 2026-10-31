@@ -109,7 +109,7 @@ yt/
 ├─ transkrypcje-list.txt # kolejka URL-i do transkrypcji (ignorowana przez git)
 ├─ yt-list2-DONE.txt    # historia już przetworzonej listy (ignorowana przez git)
 ├─ TODO.txt, TODO2.txt # notatki/zlecenia lokalne (ignorowane przez git)
-├─ opencode.jsonc       # konfiguracja OpenCode (model, serwer MCP YouTube)
+├─ opencode.jsonc       # projektowe nadpisanie modelu (reszta w ~/.config/opencode)
 ├─ AGENTS.md            # wskazówki dla agentów AI pracujących w repo
 ├─ README.md
 ├─ docs/
@@ -222,10 +222,12 @@ agentom AI dwa narzędzia:
 - `get_youtube_transcript` — pobranie transkrypcji pojedynczego filmu
   (biblioteka `youtube-transcript-api`).
 
-Konfiguracja w `opencode.jsonc` wskazuje na interpreter z jego środowiska
-`.venv`. To narzędzie działa „ad hoc” w rozmowie z agentem; masowe pobieranie
-transkrypcji realizuje `transkrypcje.ps1`. Sam katalog `youtube-mcp` nie jest
-częścią tego repozytorium i nie jest potrzebny do działania obu skryptów.
+Konfiguracja w `opencode.jsonc` nie zawiera już serwera MCP YouTube — projekt
+ogranicza się do nadpisania modelu. Aby użyć tego serwera, dodaj wpis w globalnym
+`~/.config/opencode/opencode.jsonc`. To narzędzie działa „ad hoc” w rozmowie z
+agentem; masowe pobieranie transkrypcji realizuje `transkrypcje.ps1`. Sam katalog
+`youtube-mcp` nie jest częścią tego repozytorium i nie jest potrzebny do działania
+obu skryptów.
 
 Katalog `youtube-mcp` zajmuje ok. 250 MB, bo prawie całą objętość stanowi
 `.venv` (zależności: FastMCP, google-api-python-client, youtube-transcript-api
@@ -239,10 +241,17 @@ w tej samej lokalizacji.
 
 ## Konfiguracja OpenCode
 
-`opencode.jsonc` definiuje lokalny model (LM Studio) oraz serwer MCP `youtube`
-(ścieżki bezwzględne wskazują na sąsiednie repozytorium i installation lokalną).
-Plik jest specyficzny dla tej maszyny — przy przenoszeniu projektu trzeba
-poprawić ścieżki. Klucz API jest brany ze zmiennej środowiskowej `YOUTUBE_API_KEY`.
+Projektowy `opencode.jsonc` ogranicza się do nadpisania modelu:
+
+```jsonc
+{
+  "model": "deepseek/deepseek-flash"
+}
+```
+
+Provider LM Studio, lista modeli oraz MCP są w globalnym
+`~/.config/opencode/opencode.jsonc`. Dzięki temu projekt nie duplikuje
+konfiguracji providera ani serwerów MCP.
 
 ## Uwagi
 
