@@ -8,9 +8,9 @@ Rejestr kanałów, z których pobrano transkrypcje, oraz lista propozycji na prz
 | --- | --- | --- | --- | ---: | --- |
 | [Qullamaggie (Kristjan Kullamägi)](https://www.youtube.com/@Qullamaggie) | trading | Momentum, breakouts, EP/ORB, psychologia tradingu | angielski (en) | 443 | 2017-02-01 – 2023-12-15 |
 | [Jack Corsellis](https://www.youtube.com/@JackCorsellis) | trading | Qullamaggie/ORB/HTF, Minervini/VCP, O'Neil/CANSLIM | angielski (en) | 88 | 2019-01-14 – 2026-10-06 |
-| [Bartosz Czekała](https://www.youtube.com/@BartoszCzekala) | zdrowie | Zdrowie, suplementy, nootropiki, pamięć i nauka języków | polski (pl) | 266 | 2021-06-08 – 2026-10-21 |
-| [Marek Skoczylas](https://www.youtube.com/@MarekSkoczylasPL) | zdrowie | Zdrowie naturalne, suplementy, zioła, długowieczność | polski (pl) | 1131 | 2018-07-18 – 2026-10-22 |
-| [Bracia Rodzeń](https://www.youtube.com/@BraciaRodzen) | medycyna i zdrowie | Medycyna, dieta ketogeniczna, farmakologia, zdrowie publiczne | polski (pl) | 1037 | 2020-04-22 – 2026-10-19 |
+| [Bartosz Czekała](https://www.youtube.com/@BartoszCzekala) | zdrowie | Zdrowie, suplementy, nootropiki, pamięć i nauka języków | polski (pl) | 267 | 2021-06-08 – 2026-10-21 |
+| [Marek Skoczylas](https://www.youtube.com/@MarekSkoczylasPL) | zdrowie | Zdrowie naturalne, suplementy, zioła, długowieczność | polski (pl) | 1133 | 2018-07-18 – 2026-10-22 |
+| [Bracia Rodzeń](https://www.youtube.com/@BraciaRodzen) | medycyna i zdrowie | Medycyna, dieta ketogeniczna, farmakologia, zdrowie publiczne | polski (pl) | 1038 | 2020-04-22 – 2026-10-19 |
 | [dr Angelika Kargulewicz](https://www.youtube.com/@dr-angelika-kargulewicz) | zdrowie i dietetyka | Dietetyka, żywienie, zdrowie metaboliczne i kobiet | polski (pl) | 291 | 2021-07-04 – 2026-10-18 |
 | [dr Bartek Kulczyński](https://www.youtube.com/@drbartekpl) | zdrowie i dietetyka | Dietetyka, suplementy, profilaktyka chorób cywilizacyjnych | polski (pl) | 816 | 2020-11-30 – 2026-10-22 |
 | [Fundacja Chorób Mózgu](https://www.youtube.com/@fundacjachorobmozgu) | medycyna | Neurologia, choroby mózgu, edukacja pacjentów i opiekunów | polski (pl) | 178 | 2019-03-13 – 2026-09-30 |
@@ -21,42 +21,51 @@ Rejestr kanałów, z których pobrano transkrypcje, oraz lista propozycji na prz
 | [Uniwersytet Medyczny w Lublinie (UMLub)](https://www.youtube.com/c/UMLub24) | edukacja medyczna | Wykłady medyczne, farmakologia, neurologia, zdrowie publiczne | polski (pl) | 171 | 2019-01-18 – 2026-10-22 |
 | [Warszawski Uniwersytet Medyczny](https://www.youtube.com/channel/UCGVyo888UbDX7CIjOhO58Yw) | edukacja medyczna | Edukacja medyczna, zdrowie publiczne, wywiady z ekspertami | polski (pl) | 169 | 2018-10-12 – 2026-10-01 |
 
-**Razem pobrane:** 97 kanałów, 19413 transkrypcji.
+**Razem pobrane:** 97 kanałów, 19412 transkrypcji.
 
 ### Pobrane w ramach kategorii A (long-form)
 
-| Kanał | Transkrypcje | Uwaga |
-| --- | ---: | --- |
-| JAMA Network | 1390 | czasopismo |
-| AGA | 1077 | towarzystwo kliniczne |
-| Crohn's & Colitis Foundation | 801 | IBD |
-| Доктор Вялов | 757 | gastroenterologia RU |
-| Ninja Nerd | 621 | mechanizmy/fizjologia |
-| The Curbsiders | 564 | podcast kliniczny |
-| Nutrition Made Simple! | 382 | dietetyka evidence-based |
-| Poradnik Gastrologiczny | 330 | lekarz gastrolog PL |
-| American Migraine Foundation | 254 | migrena, pacjenckie |
-| Zero To Finals | 172 | edukacja medyczna |
-| American Family Physician | 75 | medycyna rodzinna |
-| Migraine World Summit | 73 | migrena, pacjenckie |
-| American College of Gastroenterology | 0 | wszystkie wybrane filmy bez napisów |
+| Kanał | Long-form | Pobrane | Pozostało |
+| --- | ---: | ---: | ---: |
+| VJHemOnc | 18 302* | 203 | 18 099 |
+| Mayo Clinic | 12 280 | 147 | 12 133 |
+| Cleveland Clinic | 5 377 | 17 | 5 360 |
+| Johns Hopkins Medicine | 4 888 | 4 520 | 368 |
+| JAMA Network | 2 142 | 1 390 | 752 |
+| Osmosis | 1 752 | 1 640 | 112 |
+| AGA | 1 179 | 1 077 | 102 |
+| Доктор Вялов | 735 | 757** | 0 |
+| Ninja Nerd | 661 | 621 | 40 |
+| American College of Gastroenterology | 623 | 0 | 623 |
+| The Curbsiders | 595 | 564 | 31 |
+| Nutrition Made Simple! | 392 | 382 | 10 |
+| Crohn's & Colitis Foundation | 807 | 801 | 6 |
+| Poradnik Gastrologiczny | 330 | 330 | 0 |
+| American Migraine Foundation | 289 | 254 | 35 |
+| Zero To Finals | 178 | 172 | 6 |
+| American Family Physician | 92 | 75 | 17 |
+| Migraine World Summit | 73 | 73 | 0 |
+| **Razem** | **50 695** | **13 023** | **37 672** |
+
+\* VJHemOnc — liczba z profilu kanału; może obejmować część krótkich materiałów.
+\** Доктор Вялов — 757 plików przy 735 filmach w `/videos`; nadwyżka wynika z wcześniejszych pobrań lub zmian listy kanału.
 
 ### Pobrane w ramach priorytetu WZJG/JAK
 
 | Kanał | Temat | Transkrypcje | Uwaga |
 | --- | --- | ---: | --- |
-| Crohn's & Colitis Foundation | WZJG/IBD/JAK | 465 | kliniczny + pacjencki |
+| Crohn's & Colitis Foundation | WZJG/IBD/JAK | 801 | kliniczny + pacjencki |
 | Mayo Clinic | WZJG/IBD | 147 | kliniczny |
-| AGA | WZJG/IBD | 61 | kliniczny |
+| AGA | WZJG/IBD | 1077 | kliniczny |
 | Cleveland Clinic | WZJG/IBD | 17 | kliniczny |
-| Johns Hopkins Medicine | WZJG/IBD | 12 | kliniczny |
-| The Curbsiders | WZJG/IBD | 4 | podcast kliniczny |
-| Osmosis | WZJG/mechanizmy | 2 | edukacja medyczna |
+| Johns Hopkins Medicine | WZJG/IBD | 4520 | kliniczny |
+| The Curbsiders | WZJG/IBD | 564 | podcast kliniczny |
+| Osmosis | WZJG/mechanizmy | 1640 | edukacja medyczna |
 | VJHemOnc | JAK-STAT/MPN | 203 | hematologia |
 | MedCast | WZJG/IBD | 71 | edukacja medyczna PL |
-| Poradnik Gastrologiczny | WZJG/IBD | 5 | lekarz gastrolog PL |
+| Poradnik Gastrologiczny | WZJG/IBD | 330 | lekarz gastrolog PL |
 | Towarzystwo J-elita | WZJG/IBD | 6 | **pacjenckie** |
-| Доктор Вялов | WZJG/IBD | 40 | popularyzacja RU; weryfikować |
+| Доктор Вялов | WZJG/IBD | 757 | popularyzacja RU; weryfikować |
 | Уголок Доктора | WZJG/IBD | 7 | wykłady RU |
 | МедЗнания | WZJG/endoskopia | 2 | edukacja medyczna RU |
 | СПбГастроГепа | WZJG | 1 | konferencja RU |
