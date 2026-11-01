@@ -2,7 +2,7 @@
 
 **Pobrano:** 2026-10-22  
 **Liczba artykułów:** 10  
-**Katalog:** `docs/trading/Minevrini/`
+**Katalog:** `docs/trading/Minevrini/` (uwaga: katalog celowo `Minevrini`, nazwisko Minervini)
 
 Artykuły o strategiach Marka Minerviniego: SEPA, Trend Template, VCP, zarządzanie ryzykiem
 i praktyczne zastosowanie w screeningu. Treść artykułów zapisano w plikach Markdown;

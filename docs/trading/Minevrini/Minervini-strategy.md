@@ -38,7 +38,7 @@ This document reconstructs Mark Minervini's trading method — **SEPA (Specific 
 | `finermarketpoints-sepa-vcp-guide.md` | EN | Strategy guide | Four-letter SEPA, track record, VCP, earnings, catalyst, workflow, sizing |
 | `kagels-trading-mark-minervini.md` | DE | Strategy/book review | Five SEPA elements, Trend Template, VCP, risk, primary base, book review |
 | `sos-minervini-zasady-tradingu.md` | PL | Profile/rules | Ten trading rules, base counting, price floor, no cheap stocks, psychology |
-| `Market Wizards - Minevrini.md` | EN | Book chapter | Schwager interview: risk, 10% study, price-action sandwich, ~20 patterns, re-entry |
+| `Market Wizards - Minervini.md` | EN | Book chapter | Schwager interview: risk, 10% study, price-action sandwich, ~20 patterns, re-entry |
 
 ### 0.3 Confidence labels
 
@@ -2037,7 +2037,7 @@ The repository also contains `docs/trading/Qullamaggie/Qullamaggie-strategia.md`
 | `finermarketpoints-sepa-vcp-guide.md` | Four-letter SEPA; track record; VCP; earnings; catalyst; workflow; sizing |
 | `kagels-trading-mark-minervini.md` | Five elements; Trend Template; VCP; risk; primary base; book review |
 | `sos-minervini-zasady-tradingu.md` | Ten rules; base counting; price floor; no cheap stocks; psychology |
-| `Market Wizards - Minevrini.md` | Risk; 10% study; price-action sandwich; ~20 patterns; re-entry; discipline |
+| `Market Wizards - Minervini.md` | Risk; 10% study; price-action sandwich; ~20 patterns; re-entry; discipline |
 
 ### 27.1 Primary sources to acquire next
 
